@@ -1,0 +1,554 @@
+/* 1. БАЗОВЫЕ НАСТРОЙКИ */
+* {
+  box-sizing: border-box; /* Чтобы padding не увеличивал ширину элемента */
+  margin: 0;
+  padding: 0;
+}
+
+/* Настройки для всего тела сайта */
+body {
+  font-family: Arial, sans-serif; /* Простой шрифт */
+  background-color: #ffffff;      /* Белый фон */
+  color: #333;                    /* Темно-серый цвет текста */
+  line-height: 1.5;               /* Межстрочный интервал для читаемости */
+}
+
+/* 2. КОНТЕЙНЕР (ЦЕНТРИРОВАНИЕ) */
+
+/* Класс container ограничивает ширину контента и центрирует его */
+.container {
+  margin: 0 auto;     /* Автоматические отступы слева и справа (центрирование) */
+  padding: 20px;      /* Внутренние отступы, чтобы текст не прилипал к краям */
+}
+
+/* 3. ШАПКА САЙТА (HEADER) */
+
+.header {
+  background-color: #f8f9fa; /* Светло-серый фон */
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd; /* Тонкая серая линия снизу */
+}
+
+.header-container {
+  margin: 0 auto;
+  display: flex;                  /* Включаем Flexbox для выравнивания в ряд */
+  align-items: center;            /* Выравниваем элементы по вертикали по центру */
+  justify-content: space-between; /* Распределяем элементы: лево, центр, право */
+  padding: 0 20px;
+}
+
+/* ЛОГО */
+.icon img{
+  width: 70px;
+  height: 40px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Расстояние между кнопкой темы и поиском */
+}
+
+.theme-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer; /* Курсор-рука при наведении */
+}
+
+/* ПОИСК С ИКОНКОЙ  */
+
+/* Контейнер поиска — теперь relative, чтобы иконка позиционировалась внутри */
+.search-box {
+  position: relative;       /* Нужно для абсолютного позиционирования иконки */
+  display: flex;            /* Чтобы иконка и input были в одной строке */
+  align-items: center;      /* Центрируем по вертикали */
+  background-color: #f1f3f5; /* Светло-серый фон, как на скриншоте */
+  border: 1px solid #e0e0e0; /* Тонкая серая рамка */
+  border-radius: 10px;      /* Сильное закругление (форма таблетки) */
+  padding: 0 15px;          /* Отступы слева и справа */
+  width: 320px;             /* Ширина поля поиска */
+  transition: border-color 0.2s, box-shadow 0.2s; /* Плавные переходы */
+}
+
+/* Эффект при фокусе (когда пользователь кликнул в поле) */
+.search-box:focus-within {
+  border-color: #1a73e8;              /* Синяя рамка */
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15); /* Лёгкое свечение */
+}
+
+/* Иконка лупы */
+.search-icon {
+  width: 18px;             /* Ширина иконки */
+  height: 18px;            /* Высота иконки */
+  color: #888;             /* Серый цвет, как на скриншоте */
+  flex-shrink: 0;          /* Чтобы иконка не сжималась */
+  margin-right: 10px;      /* Расстояние между иконкой и текстом */
+}
+
+/* Само поле ввода */
+.search-box input {
+  border: none;            /* Убираем стандартную рамку */
+  background: transparent; /* Прозрачный фон (фон задан у контейнера) */
+  outline: none;           /* Убираем стандартную обводку при фокусе */
+  padding: 10px 0;         /* Внутренние отступы */
+  font-size: 14px;         /* Размер текста */
+  color: #333;             /* Цвет текста */
+  width: 100%;             /* Растягиваем на всю доступную ширину */
+  font-family: inherit;    /* Наследуем шрифт от body */
+}
+
+/* Цвет placeholder (подсказки) */
+.search-box input::placeholder {
+  color: #999;             /* Светло-серый */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Расстояние между колокольчиком, профилем и флагом */
+}
+
+.bell-btn {
+  background: none;         /* Убираем фон */
+  border: none;             /* Убираем рамку */
+  cursor: pointer;          /* Курсор-рука */
+  padding: 5px;             /* Немного места вокруг */
+  display: flex;            /* Центрируем иконку */
+  align-items: center;
+  justify-content: center;
+  color: #888;              /* Серый цвет иконки, как на скриншоте */
+  transition: color 0.2s;   /* Плавная смена цвета при наведении */
+}
+
+/* Размер самой SVG-иконки */
+.bell-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Эффект при наведении (иконка становится темнее) */
+.bell-btn:hover {
+  color: #333;
+}
+
+/* Контейнер профиля: аватар + имя */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+/* Круглый аватар с инициалами */
+.profile-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;               /* Делает круг */
+  background-color: #e8edf5;        /* Светло-голубой фон */
+  color: #4a5568;                   /* Тёмно-серый текст */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Имя пользователя */
+.profile-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Тёмная тема */
+body.dark-theme .profile-avatar {
+  background-color: #2a2a2a;
+  color: #ccc;
+}
+
+body.dark-theme .profile-name {
+  color: #e0e0e0;
+}
+
+.flag {
+  width: 20px;
+  height: auto;
+  border-radius: 2px;
+}
+
+/* 4. ПОЛОСКА С ЛОКАЦИЕЙ */
+/* Иконка метки на карте в полоске локации */
+.location-icon {
+  width: 16px;
+  height: 16px;
+  color: #000000;           /* Серый цвет, как у текста */
+  flex-shrink: 0;        /* Чтобы иконка не сжималась */
+  margin-right: 2px;     /* Небольшой отступ от текста */
+}
+
+.location-bar {
+  border: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Расстояние между элементами */
+  margin-bottom: 20px; /* Отступ снизу */
+  color: #000000;
+}
+
+.location-text {
+  color: #999; /* Более светлый серый для второстепенного текста */
+}
+
+/* Класс для ссылок, которые должны быть прижаты к правому краю */
+.link-right {
+  margin-left: auto; /* Автоматический отступ слева "толкает" элемент вправо */
+  text-decoration: none; /* Убираем подчеркивание */
+  color: #1a73e8; /* Синий цвет ссылки */
+  font-weight: 500;
+}
+
+/* 5. БАННЕР (СИНИЙ БЛОК) */
+
+.banner {
+  background-color: #eef4fc; /* Светло-голубой фон */
+  padding: 30px;
+  border-radius: 10px; /* Закругленные углы */
+  display: flex;
+  justify-content: space-between; /* Текст слева, шаги справа */
+  margin-bottom: 30px;
+}
+
+.banner-text {
+  max-width: 60%; /* Ограничиваем ширину текста */
+}
+
+.banner-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: #1a73e8;
+  text-transform: uppercase; /* Делаем все буквы заглавными */
+  margin-bottom: 10px;
+}
+
+.banner h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.banner p {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.banner-link {
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* БЛОК С ШАГАМИ (1, 2, 3) */
+
+.banner-steps {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 35%;
+  display: flex;
+  flex-direction: column;   /* Элементы друг под другом */
+  gap: 15px;                /* Расстояние между шагами */
+}
+
+/* Каждая строка шага (кружок + текст) */
+.step {
+  display: flex;            /* Кружок и текст в одну строку */
+  align-items: center;      /* Центрируем по вертикали */
+  gap: 12px;                /* Расстояние между кружком и текстом */
+}
+
+/* Кружок с цифрой */
+.step-num {
+  width: 28px;              /* Ширина кружка */
+  height: 28px;             /* Высота кружка */
+  min-width: 28px;          /* Чтобы не сжимался */
+  background-color: #e8f0fe; /* Светло-голубой фон (как на скриншоте) */
+  color: #1a73e8;           /* Синий цвет цифры */
+  border-radius: 50%;       /* Делаем идеальный круг */
+  display: flex;            /* Центрируем цифру внутри кружка */
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;         /* Полужирная цифра */
+  font-size: 13px;
+}
+
+/* Текст шага */
+.step-text {
+  color: #333;              /* Тёмный цвет текста */
+  line-height: 1.4;         /* Читаемость */
+}
+
+/* 6. ЗАГОЛОВКИ, ТАБЫ И ФИЛЬТРЫ */
+
+h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* Блок с кнопками-табами */
+.tabs {
+  display: flex;
+  gap: 10px; /* Расстояние между кнопками */
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #1a73e8;
+  color: #fff;
+  border-color: #1a73e8;
+}
+
+/* Блок с фильтрами */
+.filters {
+  display: flex;
+  flex-wrap: wrap; /* Разрешаем перенос кнопок на новую строку, если не влезают */
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.filters button {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 5px; 
+  cursor: pointer;
+  font-size: 13px;
+  color: #555;
+}
+
+/* 7. ПОПУЛЯРНОЕ (ЗАГОЛОВОК И СЕТКА) */
+
+.popular-header {
+  display: flex;
+  justify-content: space-between; /* Заголовок слева, ссылка справа */
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.popular-header h3 {
+  font-size: 18px;
+}
+
+.count {
+  font-size: 13px;
+  color: #999;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+/* Сетка карточек. Это самый простой способ сделать адаптивные колонки */
+.cards-grid {
+  display: grid;
+  /* Автоматически создает колонки шириной минимум 240px, максимум 1fr */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px; /* Расстояние между карточками */
+  margin-bottom: 40px;
+}
+
+/* 8. КАРТОЧКА ТОВАРА */
+
+.card {
+  border: 1px solid #e0e0e0; /* Тонкая рамка */
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column; /* Элементы внутри карточки друг под другом */
+}
+
+.card-img {
+  width: 100%;         /* Картинка на всю ширину карточки */
+  height: 150px;       /* Фиксированная высота */
+  object-fit: cover;   /* Обрезает картинку, если пропорции не совпадают */
+  border-radius: 5px;
+  background-color: #eee;
+  margin-bottom: 15px;
+}
+
+.card-category {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.card h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 15px;
+  flex-grow: 1; /* Растягивает описание, чтобы кнопка всегда была внизу карточки */
+}
+
+.status {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Цвета для статусов */
+.status.green { color: #2e7d32; }  /* Зеленый */
+.status.orange { color: #ef6c00; } /* Оранжевый */
+
+.book-btn {
+  width: 100%; /* Кнопка на всю ширину карточки */
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Эффект при наведении на кнопку */
+.book-btn:hover {
+  background-color: #e9ecef;
+}
+
+/* 9. ФОРМА ЗАПРОСА */
+
+.request-form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.form-text p {
+  font-size: 14px;
+  color: #555;
+}
+
+.form-text strong {
+  color: #111; /* Делаем жирный текст темнее */
+}
+
+/* 10. FOOTER */
+
+.footer {
+  text-align: left;
+  padding: 20px;
+  font-size: 12px;
+  color: #999;
+  border-top: 1px solid #eee;
+}
+
+/* ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ (TUMBLER)               */
+
+/* 1. Дорожка (серый фон) */
+.theme-switch {
+  position: relative;
+  width: 70px;
+  height: 39px;
+  background-color: #f1f3f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  padding: 0 0;
+  box-sizing: border-box;
+}
+
+/* 2. Иконки (SVG) */
+.theme-switch .icon {
+  width: 16px;              /* Ширина иконки */
+  height: 16px;             /* Высота иконки */
+  color: #888;              /* Серый цвет по умолчанию */
+  z-index: 2;               /* Поверх бегунка */
+  transition: color 0.3s;   /* Плавная смена цвета */
+  flex-shrink: 0;           /* Чтобы иконка не сжималась */
+}
+
+/* 3. Бегунок (белый кружок) */
+.theme-switch .slider {
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  width: 28px;
+  height: 28px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+/* 4. Тёмная тема (когда добавлен класс .dark) */
+.theme-switch.dark .slider {
+  transform: translateX(36px);
+  background-color: #1a73e8;    /* Синий бегунок */
+}
+
+/* Меняем цвета иконок при тёмной теме */
+.theme-switch.dark .sun {
+  color: #888;    /* Солнце — серое */
+}
+.theme-switch.dark .moon {
+  color: #fff;    /* Луна — белая */
+}
+
+/* Меняем цвета иконок при светлой теме */
+.theme-switch:not(.dark) .sun {
+  color: #1a73e8; /* Солнце — синее */
+}
+.theme-switch:not(.dark) .moon {
+  color: #888;    /* Луна — серая */
+}
+
+/* ТЕМНАЯ ТЕМА ДЛЯ ВСЕГО САЙТА */
+
+/* Когда на body есть класс dark-theme, меняем фон и текст */
+body.dark-theme {
+  background-color: #242424; /* Очень темный фон */
+  color: #828282;            /* Светло-серый текст */
+}
+
+/* Меняем фон шапки и карточек */
+body.dark-theme .header,
+body.dark-theme .card,
+body.dark-theme .banner,
+body.dark-theme .request-form,
+body.dark-theme .location-bar {
+  background-color: #1e1e1e; /* Темно-серый фон для блоков */
+  border-color: #333;
+}
+
+/* Меняем цвет ссылок и активных кнопок */
+body.dark-theme .link-right,
+body.dark-theme .banner-link {
+  color: #74c0fc; /* Более яркий синий для темной темы */
+}

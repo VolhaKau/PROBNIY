@@ -1,0 +1,68 @@
+<dialog class="modal-w" id="modal-w">
+  <header>
+    <div class="breadcrumb">Каталог / Камеры</div>
+    <h1>Canon EOS 80D</h1>
+    <button class="close" id="close-window" type="button">×</button>
+  </header>
+
+  <div class="cols">
+    <section>
+      <div class="viewer">
+        <img src="img/camera1.jpg" alt="Canon EOS 80D">
+        <button class="arrow prev" type="button">‹</button>
+        <button class="arrow next" type="button">›</button>
+        <div class="dots">
+          <button class="dot" type="button"></button>
+          <button class="dot" type="button"></button>
+          <button class="dot" type="button"></button>
+        </div>
+      </div>
+
+      <h2>Экземпляры и брони</h2>
+      <table class="equipment">
+        <thead>
+          <tr><th>Номер</th><th>Состояние</th><th>Статус</th><th>Бронь</th></tr>
+        </thead>
+        <tbody>
+          <tr data-id="401200" data-state="Отличное" data-status="hand">
+            <td>401200</td><td>Отличное</td><td><span class="status hand">На руках</span></td><td>До 02.10</td>
+          </tr>
+          <tr data-id="401201" data-state="Потёртости" data-status="free">
+            <td>401201</td><td>Потёртости</td><td><span class="status free">Свободен</span></td><td><button class="choose" type="button">Выбрать</button></td>
+          </tr>
+          <tr data-id="401202" data-state="Ремонт" data-status="repair">
+            <td>401202</td><td>Ремонт</td><td><span class="status repair">Недоступен</span></td><td>—</td>
+          </tr>
+          <tr data-id="401203" data-state="Отличное" data-status="booked">
+            <td>401203</td><td>Отличное</td><td><span class="status booked">Забронирован</span></td><td>До 08.10</td>
+          </tr>
+          <tr class="selected" data-id="401204" data-state="Отличное" data-status="free">
+            <td>401204</td><td>Отличное</td><td><span class="status free">Свободен</span></td><td><button class="choose current" type="button">Выбран ✓</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Для съёмок ваших проектов</h2>
+      <p class="desc">Зеркальный фотоаппарат для учебной фотографии, интервью и видеосъёмки. Подходит для работы в студии и на выездных мероприятиях.</p>
+
+      <h2>Характеристики</h2>
+      <table class="specs">
+        <tr><th>Матрица</th><td>APS-C · 24,2 Мп</td></tr>
+        <tr><th>Объектив</th><td>18–135 мм f/3.5–5.6</td></tr>
+        <tr><th>Видео</th><td>Full HD · до 60 кадров/с</td></tr>
+        <tr><th>Носитель</th><td>SD / SDHC / SDXC</td></tr>
+        <tr><th>Комплект</th><td>Камера, объектив, аккумулятор, зарядное устройство, сумка</td></tr>
+      </table>
+      <aside class="warning">
+        <b>⚠ Предупреждения и ограничения</b>
+        Берегите от влаги и ударов. Проверьте комплект при получении. Для выдачи нужен студенческий билет, карту памяти подготовьте самостоятельно.
+      </aside>
+
+      <p class="picked" id="picked-info">Выбран экземпляр № 401204 · отличное состояние</p>
+      <button class="book" id="book-button" type="button">Забронировать</button>
+      <p class="msg" id="book-message" hidden>Еще не подключено</p>
+    </section>
+  </div>
+</dialog>

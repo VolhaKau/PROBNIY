@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог оборудования</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/modal-loader.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-container">
+    <div class="icon">
+      <img src="image/logo.png">
+    </div>
+      
+    <div class="header-controls">
+      <!-- переключатель темы -->
+      <div class="theme-switch" id="themeToggle">
+
+        <!-- SVG-иконка "Солнце" -->
+        <svg class="icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="M4.93 4.93l1.41 1.41"></path>
+          <path d="M17.66 17.66l1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="M6.34 17.66l-1.41 1.41"></path>
+          <path d="M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+    
+        <!-- SVG-иконка "Луна" -->
+        <svg class="icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    
+        <!-- бегунок -->
+        <div class="slider"></div>
+      </div>
+    
+      <!-- строка поиска -->
+      <div class="search-box">
+        <!-- SVG-иконка "Лупа" -->
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+      
+        <!-- поле ввода -->
+        <input type="text" placeholder="Поиск оборудования">
+      </div>
+    </div>
+
+    <!-- уведомления, профиль, флаг -->
+    <div class="header-right">
+      <!-- кнопка с колокольчиком -->
+      <button class="bell-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+      <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+      </button>
+      <!-- личный кабинет -->
+      <a href="profile.html" class="profile">
+        <img src="image/profile_photo.jpg" class="profile-avatar"></img>
+        <span class="profile-name">Алексей</span>
+      </a>
+      <!-- смена языка-->
+      <img src="image/flags/ru.png" alt="RU" class="flag">
+    </div>
+  </div>
+</header>
+
+  <!-- MAIN -->
+  <main class="container">
+    
+    <!-- блок с местоположением кафедры -->
+    <div class="location-bar">
+      <!-- иконка местоположения -->
+      <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s-8-7.5-8-13a8 8 0 0 1 16 0c0 5.5-8 13-8 13z"></path>
+        <circle cx="12" cy="9" r="2.5"></circle>
+      </svg>
+      <span>Получение на кафедре</span>
+      <!-- уточняющий текст -->
+      <span class="location-text">Расположение и режим работы уточните у ответственного</span>
+      <!-- ссылка на контакты кафедры -->
+      <a href="#" class="link-right">Контакты кафедры ↗</a>
+    </div>
+
+    <!-- баннер -->
+    <div class="banner"></div>
+
+    <h2>Каталог</h2>
+
+    <!-- Оборудование / Методические материалы -->
+    <div class="tabs">
+      <button class="tab">Оборудование</button>
+      <button class="tab">Методические материалы</button>
+    </div>
+
+    <!-- кнопки-фильтры -->
+    <div class="filters">
+      <button>Периферия и датчики</button>
+      <button>Микроконтроллеры и отладочные платы</button>
+      <button>Мультимедиа и оптика</button>
+      <button>Инструменты и монтаж</button>
+      <button>Сетевое оборудование</button>
+    </div>
+
+    <!-- популярное оборудование -->
+    <div class="popular-header">
+      <!-- заголовок с количеством моделей -->
+      <h3>Популярное оборудование <span class="count">5 моделей</span></h3>
+      <!-- Ссылка "Весь каталог" -->
+    </div>
+
+    <!-- сетка карточек товаров -->
+    <div class="cards-grid">
+      
+      <!-- карточка товара №1 -->
+      <div class="card">
+        <img src="#" alt="Arduino Uno R3" class="card-img">
+        <!-- категория -->
+        <p class="card-category">Микроконтроллеры</p>
+        <!-- название модели -->
+        <h4>Arduino Uno R3</h4>
+        <!-- характеристики -->
+        <p class="card-desc">Arduino Uno R3 — это компактная плата-микроконтроллер для обучения электронике и создания прототипов электронных устройств.</p>
+        <!-- статус наличия -->
+        <p class="status green">● 2 из 5 доступны</p>
+        <!-- кнопка бронирования -->
+        <button class="book-btn" data-modal-open="modal-w">Забронировать</button>
+      </div>
+
+      <!-- карточка товара №2 -->
+      <div class="card">
+        <img src="#" alt="Arduino Mega 2560" class="card-img">
+        <p class="card-category">Микроконтроллеры</p>
+        <h4>Arduino Mega 2560</h4>
+        <p class="card-desc">Arduino Mega 2560 — это более мощная версия платы Arduino Uno, созданная для сложных и масштабных проектов.</p>
+        <p class="status green">● 1 из 3 доступен</p>
+        <button class="book-btn">Забронировать</button>
+      </div>
+
+      <!-- карточка товара №3 -->
+      <div class="card">
+        <img src="#" alt="NodeMCU ESP8266" class="card-img">
+        <p class="card-category">Микроконтроллеры</p>
+        <h4>NodeMCU ESP8266</h4>
+        <p class="card-desc">NodeMCU ESP8266 — это платформа для создания устройств интернета вещей (IoT), основанная на микроконтроллере ESP8266.</p>
+        <!-- Статус наличия (оранжевый, так как доступен позже) -->
+        <p class="status orange">● Доступен с 6 октября</p>
+        <button class="book-btn">Забронировать</button>
+      </div>
+
+      <!-- карточка товара №4 -->
+      <div class="card">
+        <img src="#" alt="STM32 Nucleo F401RE" class="card-img">
+        <p class="card-category">Микроконтроллеры</p>
+        <h4>STM32 Nucleo F401RE</h4>
+        <p class="card-desc">STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.</p>
+        <p class="status green">● 3 из 4 доступны</p>
+        <button class="book-btn">Забронировать</button>
+      </div>
+
+            <!-- карточка товара №5 -->
+      <div class="card">
+        <img src="#" alt="STM32 Nucleo F401RE" class="card-img">
+        <p class="card-category">Микроконтроллеры</p>
+        <h4>STM32 Nucleo F401RE</h4>
+        <p class="card-desc">STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.</p>
+        <p class="status green">● 3 из 4 доступны</p>
+        <button class="book-btn">Забронировать</button>
+      </div>
+
+    </div>
+
+    <!-- блок с гугл-формой -->
+    <div class="request-form">
+      <div class="form-text">
+        <p><strong>Не нашли нужное оборудование?</strong></p>
+        <p>Расскажите о своей задаче — оставьте запрос в Google-форме.</p>
+      </div>
+      <a href="#" class="link-right">Запросить оборудование ↗</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 ГГТУ</p>
+  </footer>
+
+  <div id="modal-root"></div>
+</body>
+</html>

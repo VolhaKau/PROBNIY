@@ -1,0 +1,327 @@
+/* ============ БАЗА ============ */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #f5f6f8;
+  color: #1a1a1a;
+  font-size: 14px;
+  transition: background .2s, color .2s;
+}
+
+/* ============ ШАПКА ============ */
+.header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+.header-container {
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo img { width: 70px; height: 40px; display: block; }
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 520px;
+}
+
+/* 1. Дорожка (серый фон) */
+.theme-switch {
+  position: relative;
+  width: 70px;
+  height: 39px;
+  background-color: #f1f3f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  padding: 0 0;
+  box-sizing: border-box;
+}
+
+/* 2. Иконки (SVG) */
+.theme-switch .icon {
+  width: 16px;              /* Ширина иконки */
+  height: 16px;             /* Высота иконки */
+  color: #888;              /* Серый цвет по умолчанию */
+  z-index: 2;               /* Поверх бегунка */
+  transition: color 0.3s;   /* Плавная смена цвета */
+  flex-shrink: 0;           /* Чтобы иконка не сжималась */
+}
+
+/* 3. Бегунок (белый кружок) */
+.theme-switch .slider {
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  width: 28px;
+  height: 28px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+/* 4. Тёмная тема (когда добавлен класс .dark) */
+.theme-switch.dark .slider {
+  transform: translateX(36px);
+  background-color: #74c0fc;    /* Синий бегунок */
+}
+
+/* Меняем цвета иконок при тёмной теме */
+.theme-switch.dark .sun {
+  color: #888;    /* Солнце — серое */
+}
+.theme-switch.dark .moon {
+  color: #fff;    /* Луна — белая */
+}
+
+/* Меняем цвета иконок при светлой теме */
+.theme-switch:not(.dark) .sun {
+  color: #74c0fc; /* Солнце — синее */
+}
+.theme-switch:not(.dark) .moon {
+  color: #888;    /* Луна — серая */
+}
+
+/* Поиск */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  background: #f1f3f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 0 15px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-box:focus-within {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26,115,232,.15);
+}
+.search-box .search-icon { width: 18px; height: 18px; color: #888; flex-shrink: 0; }
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 10px 0;
+  font: inherit;
+  color: #333;
+}
+
+/* Правый блок */
+.header-right { display: flex; align-items: center; gap: 15px; }
+.bell-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 5px; display: flex; color: #333;
+}
+.bell-btn svg { width: 22px; height: 22px; }
+
+.profile { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+
+.profile .avatar-large,
+.profile .avatar-large-fallback {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: #e8edf5;
+  color: #4a5568;
+  display: grid; place-items: center;
+  font-size: 13px; font-weight: 600;
+}
+.profile .avatar-large[src=""] { display: none; }
+.profile:has(.avatar-large[src]:not([src=""])) .avatar-large-fallback { display: none; }
+
+.flag { width: 22px; border-radius: 2px; }
+
+/* ============ ЗАГОЛОВОК СТРАНИЦЫ ============ */
+.page-title {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 24px 20px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.page-title h1 { margin: 0; font-size: 24px; }
+.page-title p  { margin: 4px 0 0; color: #666; } 
+
+/* ============ ОСНОВНАЯ СЕТКА ============ */
+.content-wrapper {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 20px 32px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ============ ЛЕВАЯ КОЛОНКА ============ */
+.sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+.profile-card,
+.help-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.profile-card .avatar-large,
+.profile-card .avatar-large-fallback {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: #dbe6ff;
+  color: #4a7dff;
+  display: grid; place-items: center;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.profile-card .avatar-large[src=""] { display: none; }
+.profile-card:has(.avatar-large[src]:not([src=""])) .avatar-large-fallback { display: none; }
+
+.profile-card h2 { margin: 0 0 4px; font-size: 18px; }
+.profile-card p  { margin: 0 0 12px; color: #666; }
+.profile-card hr { border: none; border-top: 1px solid #eee; margin: 16px 0; }
+.ticket-label  { font-size: 12px; color: #888; margin: 0 0 4px; }
+.ticket-number { font-weight: 600; margin: 0; }
+
+.help-card { background: #eef2ff; border-color: #dbe6ff; }
+.help-card h3 { margin: 0 0 8px; font-size: 15px; }
+.help-card p  { margin: 0 0 8px; color: #555; font-size: 13px; }
+.help-card a  { color: #4a7dff; font-size: 13px; }
+
+/* ============ ПРАВАЯ КОЛОНКА ============ */
+.bookings-section h2 { margin: 0 0 16px; font-size: 18px; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.booking-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+.status { padding: 3px 10px; border-radius: 12px; font-weight: 500; }
+[data-status="expired"] .status { background: #ffe5e5; color: #d33; }
+[data-status="active"]  .status { background: #e5efff; color: #4a7dff; }
+[data-status="issued"]  .status { background: #e5ffe5; color: #2a2; }
+.id { color: #888; }
+
+.card-middle { display: flex; gap: 12px; }
+.card-middle img {
+  width: 80px; height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+.card-middle h3 { margin: 0 0 4px; font-size: 15px; }
+.card-middle p  { margin: 0 0 4px; color: #666; font-size: 13px; }
+
+.card-bottom { margin-top: auto; }
+.deadline { margin: 0 0 4px; font-weight: 600; }
+[data-status="expired"] .deadline { color: #d33; }
+.note { margin: 0 0 12px; color: #888; font-size: 12px; }
+.action-btn {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}
+.action-btn:hover { background: #f5f6f8; }
+
+/* ============ ИСТОРИЯ ============ */
+.history-block {
+  margin-top: 32px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px;
+}
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+.history-header h2 { margin: 0; font-size: 18px; }
+.history-header span { color: #888; font-size: 13px; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+th { color: #888; font-weight: 500; }
+tbody .status { background: #e5ffe5; color: #2a2; }
+
+.disclaimer { color: #aaa; font-size: 12px; margin-top: 12px; }
+
+/* ============ ФУТЕР ============ */
+footer {
+  text-align: left;
+  padding: 24px;
+  color: #888;
+  border-top: 1px solid #ddd;
+  font-size: 13px;
+}
+
+/* ============ ТЁМНАЯ ТЕМА ============ */
+body.dark-theme { background: #242424; color: #c9c9c9; }
+body.dark-theme .header { background: #242424; border-bottom-color: #828282; }
+body.dark-theme .search-box { background: #2e2e2e; border-color: #828282; }
+body.dark-theme .search-box input { color: #c9c9c9; }
+body.dark-theme .bell-btn { color: #c9c9c9; }
+body.dark-theme .page-title p { color: #c9c9c9; }
+body.dark-theme .action-btn { background: #242424; border-color: #828282; color: #c9c9c9; }
+body.dark-theme .action-btn:hover { background: #242424; }
+
+body.dark-theme .profile-card,
+body.dark-theme .booking-card,
+body.dark-theme .history-block { background: #1f1f1f; border-color: #828282; }
+body.dark-theme .help-card { background: #1f1f1f; border-color: #828282; }
+body.dark-theme .profile-card h2 { color: #c9c9c9; }
+body.dark-theme .profile-card p  { color: #3b3b3b; }
+body.dark-theme .profile-card hr { border-top-color: #828282; }
+body.dark-theme .card-middle p   { color: #3b3b3b; }
+body.dark-theme th, body.dark-theme td { border-bottom-color: #828282; }
+body.dark-theme .note { color: #c9c9c9; }
+
+body.dark-theme .profile .avatar-large,
+body.dark-theme .profile .avatar-large-fallback,
+body.dark-theme .profile-card .avatar-large-fallback { background: #2a2a2a; color: #c9c9c9; }
