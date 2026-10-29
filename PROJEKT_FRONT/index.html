@@ -101,12 +101,12 @@
 
     <!-- Оборудование / Методические материалы -->
     <div class="tabs">
-      <button class="tab">Оборудование</button>
+      <button class="tab" id="btn-equipment">Оборудование</button>
       <button class="tab">Методические материалы</button>
     </div>
 
     <!-- кнопки-фильтры -->
-    <div class="filters">
+    <div class="filters hidden-filters" id="filters-panel">
       <button>Периферия и датчики</button>
       <button>Микроконтроллеры и отладочные платы</button>
       <button>Мультимедиа и оптика</button>
@@ -122,63 +122,9 @@
     </div>
 
     <!-- сетка карточек товаров -->
-    <div class="cards-grid">
+    <div class="cards-grid" id="cards-container">
       
-      <!-- карточка товара №1 -->
-      <div class="card">
-        <img src="#" alt="Arduino Uno R3" class="card-img">
-        <!-- категория -->
-        <p class="card-category">Микроконтроллеры</p>
-        <!-- название модели -->
-        <h4>Arduino Uno R3</h4>
-        <!-- характеристики -->
-        <p class="card-desc">Arduino Uno R3 — это компактная плата-микроконтроллер для обучения электронике и создания прототипов электронных устройств.</p>
-        <!-- статус наличия -->
-        <p class="status green">● 2 из 5 доступны</p>
-        <!-- кнопка бронирования -->
-        <button class="book-btn" data-modal-open="modal-w">Забронировать</button>
-      </div>
-
-      <!-- карточка товара №2 -->
-      <div class="card">
-        <img src="#" alt="Arduino Mega 2560" class="card-img">
-        <p class="card-category">Микроконтроллеры</p>
-        <h4>Arduino Mega 2560</h4>
-        <p class="card-desc">Arduino Mega 2560 — это более мощная версия платы Arduino Uno, созданная для сложных и масштабных проектов.</p>
-        <p class="status green">● 1 из 3 доступен</p>
-        <button class="book-btn">Забронировать</button>
-      </div>
-
-      <!-- карточка товара №3 -->
-      <div class="card">
-        <img src="#" alt="NodeMCU ESP8266" class="card-img">
-        <p class="card-category">Микроконтроллеры</p>
-        <h4>NodeMCU ESP8266</h4>
-        <p class="card-desc">NodeMCU ESP8266 — это платформа для создания устройств интернета вещей (IoT), основанная на микроконтроллере ESP8266.</p>
-        <!-- Статус наличия (оранжевый, так как доступен позже) -->
-        <p class="status orange">● Доступен с 6 октября</p>
-        <button class="book-btn">Забронировать</button>
-      </div>
-
-      <!-- карточка товара №4 -->
-      <div class="card">
-        <img src="#" alt="STM32 Nucleo F401RE" class="card-img">
-        <p class="card-category">Микроконтроллеры</p>
-        <h4>STM32 Nucleo F401RE</h4>
-        <p class="card-desc">STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.</p>
-        <p class="status green">● 3 из 4 доступны</p>
-        <button class="book-btn">Забронировать</button>
-      </div>
-
-            <!-- карточка товара №5 -->
-      <div class="card">
-        <img src="#" alt="STM32 Nucleo F401RE" class="card-img">
-        <p class="card-category">Микроконтроллеры</p>
-        <h4>STM32 Nucleo F401RE</h4>
-        <p class="card-desc">STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.</p>
-        <p class="status green">● 3 из 4 доступны</p>
-        <button class="book-btn">Забронировать</button>
-      </div>
+      
 
     </div>
 

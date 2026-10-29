@@ -552,3 +552,28 @@ body.dark-theme .link-right,
 body.dark-theme .banner-link {
   color: #74c0fc; /* Более яркий синий для темной темы */
 }
+
+/* --- Стили для скрытия и появления фильтров --- */
+
+/* Класс, который полностью скрывает блок */
+.hidden-filters {
+  display: none !important;
+}
+
+/* Класс для плавного появления */
+.filters.show-animation {
+  /* Анимация: имя, длительность, плавность */
+  animation: slideDownFade 0.4s ease-out forwards;
+}
+
+/* Сама анимация (сдвиг сверху вниз и проявление) */
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
