@@ -53,7 +53,7 @@
         </svg>
       
         <!-- поле ввода -->
-        <input type="text" placeholder="Поиск оборудования">
+        <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Поиск оборудования">
       </div>
     </div>
 
@@ -69,10 +69,45 @@
       <!-- личный кабинет -->
       <a href="profile.html" class="profile">
         <img src="image/profile_photo.jpg" class="profile-avatar"></img>
-        <span class="profile-name">Алексей</span>
+        <span class="profile-name" data-i18n="profile_name">Алексей</span>
       </a>
       <!-- смена языка-->
-      <img src="image/flags/ru.png" alt="RU" class="flag">
+      <!-- Смена языка (выпадающее меню) -->
+      <div class="language-dropdown" id="languageDropdown">
+        
+        <!-- Кнопка с текущим выбранным языком -->
+        <button class="lang-btn" id="currentLangBtn" aria-haspopup="true" aria-expanded="false">
+          <img src="image/flags/ru.png" alt="RU" class="flag" id="currentFlagImg">
+        </button>
+
+        <!-- Выпадающий список с языками -->
+        <ul class="lang-menu" id="langMenu">
+          <li>
+            <button class="lang-option" data-lang="ru">
+              <img src="image/flags/ru.png" alt="RU" class="flag">
+              <span>Русский</span>
+            </button>
+          </li>
+          <li>
+            <button class="lang-option" data-lang="en">
+              <img src="image/flags/eng.png" alt="EN" class="flag">
+              <span>English</span>
+            </button>
+          </li>
+          <li>
+            <button class="lang-option" data-lang="be">
+              <img src="image/flags/by.png" alt="BY" class="flag">
+              <span>Беларуская</span>
+            </button>
+          </li>
+          <li>
+            <button class="lang-option" data-lang="fr">
+              <img src="image/flags/fr.png" alt="FR" class="flag">
+              <span>Français</span>
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>
@@ -87,37 +122,37 @@
         <path d="M12 22s-8-7.5-8-13a8 8 0 0 1 16 0c0 5.5-8 13-8 13z"></path>
         <circle cx="12" cy="9" r="2.5"></circle>
       </svg>
-      <span>Получение на кафедре</span>
-      <!-- уточняющий текст -->
-      <span class="location-text">Расположение и режим работы уточните у ответственного</span>
-      <!-- ссылка на контакты кафедры -->
-      <a href="#" class="link-right">Контакты кафедры ↗</a>
+      <span data-i18n="location_title">Получение на кафедре</span>
+      <span class="location-text" data-i18n="location_desc">Расположение и режим работы уточните у ответственного</span>
+      <a href="#" class="link-right" data-i18n="location_link">Контакты кафедры ↗</a>
+
     </div>
 
     <!-- баннер -->
     <div class="banner"></div>
-
-    <h2>Каталог</h2>
+    <h2><h2 data-i18n="catalog_title">Каталог</h2></h2>
 
     <!-- Оборудование / Методические материалы -->
     <div class="tabs">
-      <button class="tab" id="btn-equipment">Оборудование</button>
-      <button class="tab">Методические материалы</button>
+      <button class="tab" id="btn-equipment" data-i18n="tab_equipment">Оборудование</button>
+      <button class="tab" data-i18n="tab_materials">Методические материалы</button>
     </div>
 
     <!-- кнопки-фильтры -->
     <div class="filters hidden-filters" id="filters-panel">
-      <button>Периферия и датчики</button>
-      <button>Микроконтроллеры и отладочные платы</button>
-      <button>Мультимедиа и оптика</button>
-      <button>Инструменты и монтаж</button>
-      <button>Сетевое оборудование</button>
+      <button data-i18n="filter_peripherals">Периферия и датчики</button>
+      <button data-i18n="filter_microcontrollers">Микроконтроллеры и отладочные платы</button>
+      <button data-i18n="filter_multimedia">Мультимедиа и оптика</button>
+      <button data-i18n="filter_tools">Инструменты и монтаж</button>
+      <button data-i18n="filter_network">Сетевое оборудование</button>
     </div>
 
     <!-- популярное оборудование -->
     <div class="popular-header">
       <!-- заголовок с количеством моделей -->
-      <h3>Популярное оборудование <span class="count">5 моделей</span></h3>
+      <h3>
+        <span data-i18n="popular_title">Популярное оборудование</span> 
+        <span class="count" data-i18n="popular_count">5 моделей</span></h3>
       <!-- Ссылка "Весь каталог" -->
     </div>
 
@@ -131,17 +166,16 @@
     <!-- блок с гугл-формой -->
     <div class="request-form">
       <div class="form-text">
-        <p><strong>Не нашли нужное оборудование?</strong></p>
-        <p>Расскажите о своей задаче — оставьте запрос в Google-форме.</p>
+        <p><strong data-i18n="request_title">Не нашли нужное оборудование?</strong></p>
+        <p data-i18n="request_desc">Расскажите о своей задаче — оставьте запрос в форме. она обязательно появится. однажды...</p>
       </div>
-      <a href="#" class="link-right">Запросить оборудование ↗</a>
     </div>
 
   </main>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2026 ГГТУ</p>
+  <p data-i18n="footer_text">&#169; 2026 ГГТУ</p>
   </footer>
 
   <div id="modal-root"></div>
