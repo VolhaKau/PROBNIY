@@ -1,16 +1,25 @@
 export function initModal() {
   const modal = document.getElementById('modal-w');
-  const rows = document.querySelectorAll('.equipment tbody tr');
-  const picked = document.getElementById('picked-info');
-  const msg = document.getElementById('book-message');
+  if (!modal) return null;
 
-  document.getElementById('close-window').onclick = () => modal.close();
+  // Ищем строго внутри модалки
+  const rows = modal.querySelectorAll('.equipment tbody tr');
+  const picked = modal.querySelector('#picked-info');
+  const msg = modal.querySelector('#book-message');
+  const closeBtn = modal.querySelector('#close-window');
+  const bookBtn = modal.querySelector('#book-button');
 
-  // закрытие по клику на фон
+  // Закрытие по кнопке
+  if (closeBtn) {
+    closeBtn.onclick = () => modal.close();
+  }
+
+  // Закрытие по клику на фон
   modal.addEventListener('click', (e) => {
     if (e.target === modal) modal.close();
   });
 
+  // Выбор экземпляра
   rows.forEach((row) => {
     const btn = row.querySelector('.choose');
     if (!btn) return;
@@ -28,12 +37,18 @@ export function initModal() {
         }
       });
 
-      picked.textContent = `Выбран экземпляр № ${row.dataset.id} · ${row.dataset.state.toLowerCase()} состояние`;
-      msg.hidden = true;
+      if (picked) {
+        picked.textContent =
+          `Выбран экземпляр № ${row.dataset.id} · ${row.dataset.state.toLowerCase()} состояние`;
+      }
+      if (msg) msg.hidden = true;
     };
   });
 
-  document.getElementById('book-button').onclick = () => { msg.hidden = false; };
+  // Кнопка "Забронировать"
+  if (bookBtn && msg) {
+    bookBtn.onclick = () => { msg.hidden = false; };
+  }
 
-  return modal; // вернём, чтобы потом открывать
+  return modal;
 }

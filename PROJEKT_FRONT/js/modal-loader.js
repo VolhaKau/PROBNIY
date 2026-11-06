@@ -1,17 +1,22 @@
 import { initModal } from './a.js';
 
-// Грузим HTML модалки и вставляем в DOM
-const html = await fetch('./modal.html').then(r => r.text());
-document.getElementById('modal-root').innerHTML = html;
+const root = document.getElementById('modal-root');
 
-// Инициализируем логику модалки
-const modal = initModal();
+if (root) {
+  try {
+    const html = await fetch('./modal.html').then(r => r.text());
+    root.innerHTML = html;
 
-// Вешаем открытие на весь документ
-document.addEventListener('click', (e) => {
-  // Проверяем, если клик был по кнопке (или внутри кнопки)
-  const btn = e.target.closest('.book-btn');
-  if (btn) {
-    modal.showModal();
+    const modal = initModal();
+
+    // Открытие по клику на любую кнопку .book-btn
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.book-btn');
+      if (btn && modal) {
+        modal.showModal();
+      }
+    });
+  } catch (err) {
+    console.error('Не удалось загрузить модалку:', err);
   }
-});
+}

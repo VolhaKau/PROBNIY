@@ -1,0 +1,202 @@
+/* ============ БАЗА ============ */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f5f6f8;
+  color: #1a1a1a;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: background .2s, color .2s;
+}
+
+button { font: inherit; cursor: pointer; }
+
+/* ============ ШАПКА ============ */
+.header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+.header-container {
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.logo img, .icon img { width: 70px; height: 40px; display: block; }
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 520px;
+}
+
+/* ============ ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ============ */
+.theme-switch {
+  position: relative;
+  width: 70px;
+  height: 39px;
+  background-color: #f1f3f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.theme-switch .icon {
+  width: 16px; height: 16px;
+  color: #888;
+  z-index: 2;
+  transition: color .3s;
+  flex-shrink: 0;
+}
+.theme-switch .slider {
+  position: absolute;
+  top: 5px; left: 3px;
+  width: 28px; height: 28px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  transition: transform .3s ease;
+  z-index: 1;
+}
+.theme-switch.dark .slider { transform: translateX(36px); background: #74c0fc; }
+.theme-switch.dark .sun  { color: #888; }
+.theme-switch.dark .moon { color: #fff; }
+.theme-switch:not(.dark) .sun  { color: #74c0fc; }
+.theme-switch:not(.dark) .moon { color: #888; }
+
+/* ============ ПОИСК ============ */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  background: #f1f3f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 0 15px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-box:focus-within {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26,115,232,.15);
+}
+.search-box .search-icon { width: 18px; height: 18px; color: #888; flex-shrink: 0; }
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 10px 0;
+  font: inherit;
+  color: #333;
+}
+.search-box input::placeholder { color: #999; }
+
+/* ============ ПРАВЫЙ БЛОК ШАПКИ ============ */
+.header-right { display: flex; align-items: center; gap: 15px; }
+.bell-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 5px; display: flex; color: #333;
+  transition: color .2s;
+}
+.bell-btn svg { width: 22px; height: 22px; }
+.bell-btn:hover { color: #1a73e8; }
+
+.profile { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+
+.profile .avatar-large,
+.profile .avatar-large-fallback {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: #e8edf5;
+  color: #4a5568;
+  display: grid; place-items: center;
+  font-size: 13px; font-weight: 600;
+}
+.profile .avatar-large[src=""] { display: none; }
+.profile:has(.avatar-large[src]:not([src=""])) .avatar-large-fallback { display: none; }
+
+.profile-name { font-size: 14px; font-weight: 600; color: #333; }
+
+/* ============ ЯЗЫКОВОЕ МЕНЮ ============ */
+.language-dropdown { position: relative; display: inline-block; margin-left: 5px; }
+.lang-btn {
+  background: transparent; border: none; cursor: pointer;
+  padding: 0; display: flex; align-items: center; outline: none;
+}
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: 100%; right: 0;
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  padding: 8px 0;
+  min-width: 160px;
+  z-index: 1000;
+  list-style: none;
+  margin-left: 0;
+}
+.lang-menu.show { display: block; }
+.lang-menu li { margin: 0; padding: 0; list-style: none; }
+.lang-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  font-family: inherit;
+  transition: background-color .2s;
+}
+.lang-option:hover { background-color: #f5f5f5; }
+.flag { width: 22px; height: 16px; object-fit: cover; border-radius: 2px; }
+
+/* ============ ФУТЕР ============ */
+.footer, footer {
+  text-align: left;
+  padding: 24px;
+  color: #888;
+  border-top: 1px solid #ddd;
+  font-size: 13px;
+}
+
+/* ============ ТЁМНАЯ ТЕМА (общие элементы) ============ */
+body.dark-theme { background: #242424; color: #c9c9c9; }
+body.dark-theme .header { background: #242424; border-bottom-color: #828282; }
+body.dark-theme .search-box { background: #2e2e2e; border-color: #828282; }
+body.dark-theme .search-box input { color: #c9c9c9; }
+body.dark-theme .search-box input::placeholder { color: #888; }
+body.dark-theme .bell-btn { color: #c9c9c9; }
+body.dark-theme .bell-btn:hover { color: #74c0fc; }
+body.dark-theme .theme-switch { background: #2e2e2e; border-color: #828282; }
+body.dark-theme .footer, body.dark-theme footer { border-top-color: #333; color: #888; }
+body.dark-theme .profile .avatar-large,
+body.dark-theme .profile .avatar-large-fallback { background: #2a2a2a; color: #c9c9c9; }
+body.dark-theme .profile-name { color: #e0e0e0; }
+body.dark-theme .lang-menu { background: #1f1f1f; border-color: #333; }
+body.dark-theme .lang-option { color: #c9c9c9; }
+body.dark-theme .lang-option:hover { background-color: #2a2a2a; }
+
+/* ============ АДАПТИВ ============ */
+@media (max-width: 900px) {
+  .header-controls { max-width: none; }
+  .search-box { display: none; }
+}

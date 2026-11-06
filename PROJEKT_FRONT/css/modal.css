@@ -1,64 +1,51 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  color: #303943;
-  font: 13px Arial, sans-serif;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-#open-window {
-  padding: 7px 12px;
-}
+/* Модалка изолирована: не трогает body/h1/h2 глобально */
 
 .modal-w {
-  width: 820px; /* поменять размеры */
+  width: 820px;
   max-width: calc(100vw - 32px);
   max-height: calc(100vh - 32px);
   padding: 20px;
   border: 1px solid #d5d9df;
   border-radius: 16px;
   overflow: auto;
-  color: inherit;
+  color: #303943;
   background: #fff;
-  box-shadow: 0 8px 28px rgba(30, 42, 60, .14);
-  margin: auto
+  box-shadow: 0 8px 28px rgba(30,42,60,.14);
+  margin: auto;
+  font: 13px Arial, sans-serif;
 }
+.modal-w *,
+.modal-w *::before,
+.modal-w *::after { box-sizing: border-box; }
 
-.modal header {
+.modal-w button { font: inherit; cursor: pointer; }
+
+.modal-w header {
   position: relative;
   padding-right: 35px;
 }
 
-.breadcrumb {
+.modal-w .breadcrumb {
   color: #818b98;
   font-size: 10px;
 }
 
-h1 {
+.modal-w h1 {
   margin: 7px 0 0;
   font-size: 22px;
   font-weight: 500;
 }
 
-h2 {
+.modal-w h2 {
   margin: 16px 0 8px;
   font-size: 15px;
   font-weight: 600;
 }
 
-.close {
+.modal-w .close {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 28px;
-  height: 28px;
+  top: 8px; right: 8px;
+  width: 28px; height: 28px;
   border: 1px solid #d9dde3;
   border-radius: 4px;
   color: #555f6c;
@@ -66,152 +53,110 @@ h2 {
   font-size: 20px;
 }
 
-.cols {
+.modal-w .cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
   margin-top: 18px;
 }
 
-.viewer {
+.modal-w .viewer {
   position: relative;
   height: 195px;
   overflow: hidden;
   border: 1px solid #e0e3e7;
   background: #f0f1f2;
 }
-
-.viewer img {
+.modal-w .viewer img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: contain;
 }
 
-.arrow {
+.modal-w .arrow {
   position: absolute;
   top: 50%;
-  width: 26px;
-  height: 28px;
+  width: 26px; height: 28px;
   padding: 0;
   transform: translateY(-50%);
   border: 1px solid #d3d7dc;
   border-radius: 4px;
   color: #555f6c;
-  background: white;
+  background: #fff;
   font-size: 22px;
 }
+.modal-w .prev { left: 8px; }
+.modal-w .next { right: 8px; }
 
-.prev {
-  left: 8px;
-}
-
-.next {
-  right: 8px;
-}
-
-.dots {
+.modal-w .dots {
   position: absolute;
-  bottom: 8px;
-  left: 50%;
+  bottom: 8px; left: 50%;
   display: flex;
   gap: 5px;
   transform: translateX(-50%);
 }
-
-.dot {
-  width: 7px;
-  height: 7px;
+.modal-w .dot {
+  width: 7px; height: 7px;
   padding: 0;
   border: 1px solid #9da8b5;
   border-radius: 50%;
   background: #c5ccd5;
 }
 
-.equipment,
-.specs {
+.modal-w .equipment,
+.modal-w .specs {
   width: 100%;
   margin-top: 8px;
   border-collapse: collapse;
   font-size: 11px;
 }
-
-.equipment th,
-.equipment td,
-.specs th,
-.specs td {
+.modal-w .equipment th,
+.modal-w .equipment td,
+.modal-w .specs th,
+.modal-w .specs td {
   padding: 7px 6px;
   border: 1px solid #dfe3e8;
   text-align: left;
   vertical-align: top;
 }
-
-.equipment th {
+.modal-w .equipment th {
   color: #697483;
   background: #f3f5f7;
   font-weight: 500;
 }
+.modal-w .equipment tr.selected { background: #eaf1fb; }
+.modal-w .equipment td:first-child { font-weight: 600; }
 
-.equipment tr.selected {
-  background: #eaf1fb;
-}
-
-.equipment td:first-child {
-  font-weight: 600;
-}
-
-.status {
+.modal-w .status {
   display: inline-block;
   padding: 3px 5px;
   border-radius: 3px;
   font-size: 10px;
 }
+.modal-w .hand,
+.modal-w .repair { color: #9d5555; background: #f8eaea; }
+.modal-w .free   { color: #39765f; background: #e8f3ed; }
+.modal-w .booked { color: #907333; background: #faf2dc; }
 
-.hand,
-.repair {
-  color: #9d5555;
-  background: #f8eaea;
-}
-
-.free {
-  color: #39765f;
-  background: #e8f3ed;
-}
-
-.booked {
-  color: #907333;
-  background: #faf2dc;
-}
-
-.choose {
+.modal-w .choose {
   color: #3564bd;
   background: transparent;
   font-size: 11px;
   padding: 2px 4px;
   border: 0;
 }
+.modal-w .choose.current { color: #244f9b; }
 
-.choose.current {
-  color: #244f9b;
-}
-
-.desc {
+.modal-w .desc {
   margin: 4px 0 15px;
   color: #687483;
   line-height: 1.45;
 }
 
-.specs th {
-  width: 29%;
-  color: #727d8a;
-  font-weight: 400;
-}
+.modal-w .specs th { width: 29%; color: #727d8a; font-weight: 400; }
+.modal-w .specs td { color: #414b57; }
 
-.specs td {
-  color: #414b57;
-}
-
-.warning {
+.modal-w .warning {
   margin-top: 14px;
   padding: 10px;
   border: 1px solid #eadba8;
@@ -220,19 +165,15 @@ h2 {
   font-size: 11px;
   line-height: 1.45;
 }
+.modal-w .warning b { display: block; margin-bottom: 4px; }
 
-.warning b {
-  display: block;
-  margin-bottom: 4px;
-}
-
-.picked {
+.modal-w .picked {
   margin: 12px 0 8px;
   color: #727d8a;
   font-size: 11px;
 }
 
-.book {
+.modal-w .book {
   border: 1px solid #3564bd;
   border-radius: 4px;
   width: 100%;
@@ -241,9 +182,21 @@ h2 {
   color: #fff;
   background: #3564bd;
 }
+.modal-w .book:hover { background: #2a52a0; }
 
-.msg {
-  color: #727d8a;
-  margin: 8px 0 0;
-  font-size: 11px;
+.modal-w .msg { color: #727d8a; margin: 8px 0 0; font-size: 11px; }
+
+/* Тёмная тема для модалки */
+body.dark-theme .modal-w {
+  background: #1f1f1f;
+  color: #c9c9c9;
+  border-color: #333;
 }
+body.dark-theme .modal-w .viewer { background: #2a2a2a; border-color: #333; }
+body.dark-theme .modal-w .equipment th { background: #2a2a2a; color: #a0a0a0; }
+body.dark-theme .modal-w .equipment th,
+body.dark-theme .modal-w .equipment td,
+body.dark-theme .modal-w .specs th,
+body.dark-theme .modal-w .specs td { border-color: #333; }
+body.dark-theme .modal-w .specs td { color: #c9c9c9; }
+body.dark-theme .modal-w .equipment tr.selected { background: #22314d; }
