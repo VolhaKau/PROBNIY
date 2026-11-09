@@ -284,19 +284,19 @@ function EquipmentCard(id, image, type, name, description, numberOfAvailable, st
 }
 
 const equipmentCards = [
-  EquipmentCard(1, '#', 'Микроконтроллеры', 'Arduino Uno R3',
+  EquipmentCard(1, 'all_oborudovanie/plati/Arduino_Uno_R3/Arduino_Uno_R3.png', 'Микроконтроллеры', 'Arduino Uno R3',
     'Arduino Uno R3 — это компактная плата-микроконтроллер для обучения электронике и создания прототипов электронных устройств.',
     '● 2 из 5 доступны', 'green'),
-  EquipmentCard(2, '#', 'Микроконтроллеры', 'Arduino Mega 2560',
+  EquipmentCard(2, 'all_oborudovanie/plati/Arduino_Mega_2560/Arduino_Mega_2560.png', 'Микроконтроллеры', 'Arduino Mega 2560',
     'Arduino Mega 2560 — это более мощная версия платы Arduino Uno, созданная для сложных и масштабных проектов.',
     '● 1 из 3 доступен', 'green'),
-  EquipmentCard(3, '#', 'Микроконтроллеры', 'NodeMCU ESP8266',
+  EquipmentCard(3, 'all_oborudovanie/plati/NodeMCU_ESP8266/NodeMCU_ESP8266.png', 'Микроконтроллеры', 'NodeMCU ESP8266',
     'NodeMCU ESP8266 — это платформа для создания устройств интернета вещей (IoT), основанная на микроконтроллере ESP8266.',
     '● Доступен с 6 октября', 'orange'),
-  EquipmentCard(4, '#', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
+  EquipmentCard(4, 'all_oborudovanie/plati/NodeMCU_ESP8266/STM32_Nucleo_F401RE.png', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
     'STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.',
     '● 3 из 4 доступны', 'green'),
-  EquipmentCard(5, '#', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
+  EquipmentCard(5, 'all_oborudovanie/plati/NodeMCU_ESP8266/STM32_Nucleo_F401RE.png', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
     'STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.',
     '● 3 из 4 доступны', 'green'),
 ];
@@ -314,7 +314,7 @@ function renderCards(cardsArray) {
       <h4>${card.name}</h4>
       <p class="card-desc">${card.description}</p>
       <p class="status ${card.statusClass}">${card.numberOfAvailable}</p>
-      <button class="book-btn" data-i18n="btn_book" data-modal-open="modal-w" data-id="${card.id}">Забронировать</button>
+      <button class="book-btn" data-i18n="btn_book" data-equipment="${card.name}">Забронировать</button>
     `;
     cardsContainer.appendChild(el);
   });

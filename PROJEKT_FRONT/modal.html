@@ -1,21 +1,17 @@
 <dialog class="modal-w" id="modal-w">
   <header>
-    <div class="breadcrumb">Каталог / Камеры</div>
-    <h1>Canon EOS 80D</h1>
+    <div class="breadcrumb" id="modal-category">Каталог</div>
+    <h1 id="modal-title">Загрузка…</h1>
     <button class="close" id="close-window" type="button">×</button>
   </header>
 
   <div class="cols">
     <section>
       <div class="viewer">
-        <img src="img/camera1.jpg" alt="Canon EOS 80D">
+        <img src="" alt="">
         <button class="arrow prev" type="button">‹</button>
         <button class="arrow next" type="button">›</button>
-        <div class="dots">
-          <button class="dot" type="button"></button>
-          <button class="dot" type="button"></button>
-          <button class="dot" type="button"></button>
-        </div>
+        <div class="dots"></div>
       </div>
 
       <h2>Экземпляры и брони</h2>
@@ -23,46 +19,125 @@
         <thead>
           <tr><th>Номер</th><th>Состояние</th><th>Статус</th><th>Бронь</th></tr>
         </thead>
-        <tbody>
-          <tr data-id="401200" data-state="Отличное" data-status="hand">
-            <td>401200</td><td>Отличное</td><td><span class="status hand">На руках</span></td><td>До 02.10</td>
-          </tr>
-          <tr data-id="401201" data-state="Потёртости" data-status="free">
-            <td>401201</td><td>Потёртости</td><td><span class="status free">Свободен</span></td><td><button class="choose" type="button">Выбрать</button></td>
-          </tr>
-          <tr data-id="401202" data-state="Ремонт" data-status="repair">
-            <td>401202</td><td>Ремонт</td><td><span class="status repair">Недоступен</span></td><td>—</td>
-          </tr>
-          <tr data-id="401203" data-state="Отличное" data-status="booked">
-            <td>401203</td><td>Отличное</td><td><span class="status booked">Забронирован</span></td><td>До 08.10</td>
-          </tr>
-          <tr class="selected" data-id="401204" data-state="Отличное" data-status="free">
-            <td>401204</td><td>Отличное</td><td><span class="status free">Свободен</span></td><td><button class="choose current" type="button">Выбран ✓</button></td>
-          </tr>
-        </tbody>
+        <!-- Строки сгенерирует JS -->
+        <tbody id="modal-instances"></tbody>
       </table>
     </section>
 
     <section>
-      <h2>Для съёмок ваших проектов</h2>
-      <p class="desc">Зеркальный фотоаппарат для учебной фотографии, интервью и видеосъёмки. Подходит для работы в студии и на выездных мероприятиях.</p>
+      <h2>Описание</h2>
+      <p class="desc" id="modal-desc"></p>
 
       <h2>Характеристики</h2>
-      <table class="specs">
-        <tr><th>Матрица</th><td>APS-C · 24,2 Мп</td></tr>
-        <tr><th>Объектив</th><td>18–135 мм f/3.5–5.6</td></tr>
-        <tr><th>Видео</th><td>Full HD · до 60 кадров/с</td></tr>
-        <tr><th>Носитель</th><td>SD / SDHC / SDXC</td></tr>
-        <tr><th>Комплект</th><td>Камера, объектив, аккумулятор, зарядное устройство, сумка</td></tr>
-      </table>
+      <table class="specs" id="modal-specs"></table>
+
       <aside class="warning">
         <b>⚠ Предупреждения и ограничения</b>
-        Берегите от влаги и ударов. Проверьте комплект при получении. Для выдачи нужен студенческий билет, карту памяти подготовьте самостоятельно.
+        Берегите от влаги и ударов. Проверьте комплект при получении. Для выдачи нужен студенческий билет.
       </aside>
 
-      <p class="picked" id="picked-info">Выбран экземпляр № 401204 · отличное состояние</p>
+      <p class="picked" id="picked-info"></p>
       <button class="book" id="book-button" type="button">Забронировать</button>
-      <p class="msg" id="book-message" hidden>Еще не подключено</p>
+      <p class="msg" id="book-message" hidden></p>
     </section>
+  </div>
+</dialog>
+
+<dialog class="modal-w booking-modal" id="booking-modal">
+  <header>
+    <h1>Бронирование</h1>
+    <p class="subtitle">Выберите период</p>
+    <button class="close" id="close-booking" type="button">×</button>
+  </header>
+
+  <div class="booking-item-info">
+    <img id="booking-image" alt="" class="booking-img">
+    <div class="info-text">
+      <h2 id="booking-title"></h2>
+      <p id="booking-instance-text"></p>
+    </div>
+    <span class="status free">Доступен</span>
+  </div>
+
+  <div class="date-inputs">
+    <label>
+      <span>Дата получения</span>
+      <input type="text" id="date-start" readonly placeholder="Выберите дату">
+    </label>
+    <label>
+      <span>Дата возврата</span>
+      <input type="text" id="date-end" readonly placeholder="Выберите дату">
+    </label>
+  </div>
+
+  <div class="calendar-wrapper">
+    <div class="calendar-header">
+      <button type="button" class="cal-arrow" id="cal-prev">‹</button>
+      <span id="cal-title">Октябрь 2026</span>
+      <button type="button" class="cal-arrow" id="cal-next">›</button>
+    </div>
+    <div class="calendar-grid" id="calendar-days">
+      <div class="day-name">Пн</div><div class="day-name">Вт</div><div class="day-name">Ср</div>
+      <div class="day-name">Чт</div><div class="day-name">Пт</div><div class="day-name">Сб</div>
+      <div class="day-name">Вс</div>
+    </div>
+  </div>
+
+  <div class="date-summary">
+    <span id="date-duration">Даты не выбраны</span>
+    <span class="available-text">Доступен на выбранные даты</span>
+  </div>
+
+  <div class="info-box">
+    Получение и возврат — на кафедре по студенческому билету. Место и время согласуйте с ответственным после подтверждения.
+  </div>
+
+  <label class="checkbox-label">
+    <input type="checkbox" id="agree-rules">
+    <span>С правилами пользования ознакомлен. Обязуюсь вернуть оборудование в срок и в полной комплектации.</span>
+  </label>
+
+  <div class="booking-actions">
+    <button type="button" class="btn-cancel" id="cancel-booking">Отмена</button>
+    <button type="button" class="btn-confirm" id="confirm-booking" disabled>Подтвердить бронирование</button>
+  </div>
+</dialog>
+
+<!-- ДЛЯ МЕТОДИЧЕК ЭТО (НЕ ПОДКЛЮЧЕНО)-->
+<dialog class="modal-w method-modal" id="method-modal">
+  <header>
+    <div class="breadcrumb" id="method-category">Каталог / Методические материалы</div>
+    <button class="close" id="close-method" type="button">×</button>
+  </header>
+
+  <div class="method-content">
+    <!-- Левая колонка: Обложка и статус -->
+    <div class="method-left">
+      <img id="method-cover" src="" alt="Обложка" class="method-img">
+      <p class="status green" id="method-status"></p>
+    </div>
+
+    <!-- Правая колонка: Информация -->
+    <div class="method-right">
+      <h1 id="method-title"></h1>
+      <p class="method-authors" id="method-authors"></p>
+      <p class="method-desc" id="method-desc"></p>
+
+      <table class="specs method-specs" id="method-specs"></table>
+
+      <!-- Блок скачивания -->
+      <a href="#" class="download-box" id="method-download" download>
+        <div class="download-icon">📄</div>
+        <div class="download-text">
+          <strong>Скачать методичку</strong>
+          <span id="method-pdf-size">PDF</span>
+        </div>
+        <div class="download-arrow">⬇</div>
+      </a>
+
+      <p class="method-note">Печатный экземпляр — на кафедре по студенческому билету.</p>
+      
+      <button class="book" id="method-book-btn" type="button">Забронировать</button>
+    </div>
   </div>
 </dialog>

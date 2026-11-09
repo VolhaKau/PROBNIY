@@ -1,22 +1,43 @@
-import { initModal } from './a.js';
+// modal-loader.js
+import { initEquipmentModal } from './equipment-modal.js';
+import { initBookingModal } from './booking-modal.js';
+import { initMethodModal } from './method-modal.js';
 
-const root = document.getElementById('modal-root');
+const html = await fetch('./modal.html').then(r => r.text());
+document.getElementById('modal-root').innerHTML = html;
 
-if (root) {
-  try {
-    const html = await fetch('./modal.html').then(r => r.text());
-    root.innerHTML = html;
+let bookingController;
+let activeModalController; 
 
-    const modal = initModal();
+const equipmentController = initEquipmentModal((title, image, instanceInfo) => {
+  activeModalController = equipmentController;
+  bookingController.open(title, image, instanceInfo);
+});
 
-    // Открытие по клику на любую кнопку .book-btn
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.book-btn');
-      if (btn && modal) {
-        modal.showModal();
-      }
-    });
-  } catch (err) {
-    console.error('Не удалось загрузить модалку:', err);
+// Инициализируем методички
+const methodController = initMethodModal((title, image, instanceInfo) => {
+  activeModalController = methodController;
+  bookingController.open(title, image, instanceInfo);
+});
+
+bookingController = initBookingModal(() => {
+  if (activeModalController) {
+    activeModalController.show();
   }
-}
+});
+
+// --- ТЕКУЩАЯ ЛОГИКА ДЛЯ КАРТОЧЕК ---
+// Используем делегирование событий
+document.addEventListener('click', (e) => {
+  const equipmentBtn = e.target.closest('.book-btn');
+  if (equipmentBtn) {
+    const key = equipmentBtn.dataset.equipment;
+    if (key) equipmentController.openWith(key);
+  }
+
+  const methodBtn = e.target.closest('.method-btn');
+  if (methodBtn) {
+    const key = methodBtn.dataset.method;
+    if (key) methodController.openWith(key);
+  }
+});

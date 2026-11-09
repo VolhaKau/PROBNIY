@@ -1,24 +1,24 @@
-/* Модалка изолирована: не трогает body/h1/h2 глобально */
 
+/* Основное окно с описанием оборудования */
 .modal-w {
-  width: 820px;
-  max-width: calc(100vw - 32px);
-  max-height: calc(100vh - 32px);
-  padding: 20px;
-  border: 1px solid #d5d9df;
-  border-radius: 16px;
+  width: min(732px, calc(100vw - 32px));
+  max-height: min(1000px, calc(100dvh - 24px));
+  padding: 22px;
+  border: 1px solid #e0e3e8;
+  border-radius: 13px;
   overflow: auto;
   color: #303943;
-  background: #fff;
-  box-shadow: 0 8px 28px rgba(30,42,60,.14);
-  margin: auto;
   font: 13px Arial, sans-serif;
+  background: #fff;
+  box-shadow: 0 12px 36px rgba(24, 38, 57, 0.18);
+  margin: auto;
 }
-.modal-w *,
-.modal-w *::before,
-.modal-w *::after { box-sizing: border-box; }
 
-.modal-w button { font: inherit; cursor: pointer; }
+/* Кнопки только внутри модалки */
+.modal-w button {
+  font: inherit;
+  cursor: pointer;
+}
 
 .modal-w header {
   position: relative;
@@ -27,164 +27,584 @@
 
 .modal-w .breadcrumb {
   color: #818b98;
-  font-size: 10px;
+  font-size: 9px;
+  line-height: 1.4;
 }
 
 .modal-w h1 {
-  margin: 7px 0 0;
+  margin: 6px 0 0;
   font-size: 22px;
+  line-height: 1.25;
   font-weight: 500;
 }
 
 .modal-w h2 {
-  margin: 16px 0 8px;
-  font-size: 15px;
+  margin: 14px 0 7px;
+  font-size: 13px;
+  line-height: 1.35;
   font-weight: 600;
 }
 
 .modal-w .close {
   position: absolute;
-  top: 8px; right: 8px;
-  width: 28px; height: 28px;
-  border: 1px solid #d9dde3;
-  border-radius: 4px;
-  color: #555f6c;
-  background: #f5f6f7;
-  font-size: 20px;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  color: #657080;
+  background: #f4f6f8;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.modal-w .close:hover {
+  background: #e9edf2;
 }
 
 .modal-w .cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
-  margin-top: 18px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 17px;
 }
 
+.modal-w .cols > * {
+  min-width: 0;
+}
+
+/* Просмотрщик фото */
 .modal-w .viewer {
   position: relative;
-  height: 195px;
+  height: 172px;
   overflow: hidden;
   border: 1px solid #e0e3e7;
+  border-radius: 9px;
   background: #f0f1f2;
 }
+
 .modal-w .viewer img {
   display: block;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
 .modal-w .arrow {
   position: absolute;
   top: 50%;
-  width: 26px; height: 28px;
+  width: 24px;
+  height: 26px;
   padding: 0;
   transform: translateY(-50%);
-  border: 1px solid #d3d7dc;
-  border-radius: 4px;
-  color: #555f6c;
+  border: 1px solid #e0e3e8;
+  border-radius: 6px;
+  color: #596575;
   background: #fff;
-  font-size: 22px;
+  font-size: 20px;
+  line-height: 1;
 }
+
 .modal-w .prev { left: 8px; }
 .modal-w .next { right: 8px; }
 
 .modal-w .dots {
   position: absolute;
-  bottom: 8px; left: 50%;
+  bottom: 7px;
+  left: 50%;
   display: flex;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   transform: translateX(-50%);
 }
+
 .modal-w .dot {
-  width: 7px; height: 7px;
+  width: 8px;
+  height: 8px;
   padding: 0;
-  border: 1px solid #9da8b5;
+  border: 0;
   border-radius: 50%;
   background: #c5ccd5;
 }
 
+.modal-w .dot.active {
+  background: #3564bd;
+  border-color: #3564bd;
+}
+
+/* Таблицы экземпляров и характеристик */
 .modal-w .equipment,
 .modal-w .specs {
   width: 100%;
-  margin-top: 8px;
+  margin-top: 7px;
   border-collapse: collapse;
-  font-size: 11px;
+  font-size: 10px;
+  line-height: 1.35;
 }
+
 .modal-w .equipment th,
 .modal-w .equipment td,
 .modal-w .specs th,
 .modal-w .specs td {
   padding: 7px 6px;
-  border: 1px solid #dfe3e8;
+  border: 0;
+  border-bottom: 1px solid #e2e5e9;
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
 }
-.modal-w .equipment th {
-  color: #697483;
-  background: #f3f5f7;
-  font-weight: 500;
-}
-.modal-w .equipment tr.selected { background: #eaf1fb; }
-.modal-w .equipment td:first-child { font-weight: 600; }
 
+.modal-w .equipment th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: #77818e;
+  background: #f6f7f9;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.modal-w .equipment tr.selected {
+  background: #eaf1fb;
+}
+
+.modal-w .equipment td:first-child {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Статусы. Только внутри модалки, чтобы не трогать карточки на странице */
 .modal-w .status {
   display: inline-block;
-  padding: 3px 5px;
-  border-radius: 3px;
-  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
 }
-.modal-w .hand,
-.modal-w .repair { color: #9d5555; background: #f8eaea; }
-.modal-w .free   { color: #39765f; background: #e8f3ed; }
-.modal-w .booked { color: #907333; background: #faf2dc; }
 
+.modal-w .hand,
+.modal-w .repair {
+  color: #a05b5b;
+  background: #f8eaea;
+}
+
+.modal-w .free {
+  color: #39765f;
+  background: #e8f3ed;
+}
+
+.modal-w .booked {
+  color: #907333;
+  background: #faf2dc;
+}
+
+/* Кнопка выбора экземпляра */
 .modal-w .choose {
+  padding: 2px 0;
+  border: 0;
   color: #3564bd;
   background: transparent;
-  font-size: 11px;
-  padding: 2px 4px;
-  border: 0;
+  font-size: 10px;
+  white-space: nowrap;
 }
-.modal-w .choose.current { color: #244f9b; }
 
+.modal-w .choose:hover {
+  color: #244f9b;
+  text-decoration: underline;
+}
+
+.modal-w .choose.current {
+  color: #244f9b;
+}
+
+/* Описание и характеристики */
 .modal-w .desc {
-  margin: 4px 0 15px;
+  margin: 4px 0 13px;
   color: #687483;
-  line-height: 1.45;
+  font-size: 11px;
+  line-height: 1.4;
 }
 
-.modal-w .specs th { width: 29%; color: #727d8a; font-weight: 400; }
-.modal-w .specs td { color: #414b57; }
+.modal-w .specs th {
+  width: 25%;
+  color: #77818e;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.modal-w .specs td {
+  padding-left: 8px;
+  color: #414b57;
+}
 
 .modal-w .warning {
-  margin-top: 14px;
-  padding: 10px;
-  border: 1px solid #eadba8;
-  background: #fff8e5;
+  margin-top: 13px;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: #fff6df;
   color: #806f43;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.45;
 }
-.modal-w .warning b { display: block; margin-bottom: 4px; }
+
+.modal-w .warning b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10px;
+}
 
 .modal-w .picked {
-  margin: 12px 0 8px;
+  margin: 11px 0 7px;
+  color: #727d8a;
+  font-size: 10px;
+}
+
+.modal-w .book {
+  display: block;
+  width: 100%;
+  min-height: 31px;
+  padding: 7px 10px;
+  border: 1px solid #3564bd;
+  border-radius: 5px;
+  color: #fff;
+  background: #3564bd;
+  font-size: 11px;
+}
+
+.modal-w .book:hover {
+  background: #2d59aa;
+}
+
+.modal-w .msg {
+  margin: 8px 0 0;
+  color: #727d8a;
+  font-size: 10px;
+}
+
+/* Второе окно - бронирование. У него два класса: modal-w и booking-modal.
+   Поэтому всё, что выше, к нему тоже применяется, а тут дописываю своё */
+
+.modal-w.booking-modal {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100dvh - 24px);
+}
+
+.modal-w .subtitle {
+  margin: 4px 0 0;
+  color: #818b98;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.modal-w .booking-item-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.modal-w .booking-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.modal-w .info-text h2 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.modal-w .info-text p {
+  margin: 0;
   color: #727d8a;
   font-size: 11px;
 }
 
-.modal-w .book {
-  border: 1px solid #3564bd;
+.modal-w .booking-item-info .status {
+  margin-left: auto;
+}
+
+/* Поля для дат */
+.modal-w .date-inputs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.modal-w .date-inputs label {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.modal-w .date-inputs input {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid #d5d9df;
+  border-radius: 6px;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+}
+
+.modal-w .date-inputs input:focus {
+  border-color: #3564bd;
+}
+
+/* Календарь */
+.modal-w .calendar-wrapper {
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+}
+
+.modal-w .calendar-header {
+  position: relative;
+  height: 24px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal-w .cal-arrow {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  border: 0;
+  color: #3564bd;
+  background: transparent;
+  font-size: 18px;
+}
+
+.modal-w #cal-prev { left: 0; }
+.modal-w #cal-next { right: 0; }
+
+.modal-w .cal-arrow:hover {
+  color: #244f9b;
+}
+
+.modal-w .calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-rows: 32px;
+  min-height: 216px;
+  gap: 4px;
+  align-content: start;
+  text-align: center;
+}
+
+.modal-w .day-name {
+  padding-bottom: 8px;
+  color: #818b98;
+  font-size: 10px;
+}
+
+.modal-w .cal-day {
+  padding: 8px 0;
+  border: 0;
   border-radius: 4px;
-  width: 100%;
-  min-height: 35px;
-  padding: 7px 10px;
+  background: transparent;
+  font-size: 12px;
+}
+
+.modal-w .cal-day:hover:not(.selected) {
+  background: #f0f1f2;
+}
+
+.modal-w .cal-day.selected {
   color: #fff;
   background: #3564bd;
 }
-.modal-w .book:hover { background: #2a52a0; }
 
-.modal-w .msg { color: #727d8a; margin: 8px 0 0; font-size: 11px; }
+.modal-w .cal-day.in-range {
+  background: #eaf1fb;
+}
+
+/* Итог по датам */
+.modal-w .date-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  color: #3564bd;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.modal-w .available-text {
+  color: #818b98;
+  font-weight: 400;
+}
+
+.modal-w .info-box {
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  color: #55677d;
+  background: #f4f7fb;
+  font-size: 11px;
+}
+
+.modal-w .checkbox-label {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: #55677d;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Кнопки внизу окна брони */
+.modal-w .booking-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-w .btn-cancel,
+.modal-w .btn-confirm {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.modal-w .btn-cancel {
+  border: 1px solid #d5d9df;
+  background: #fff;
+  color: inherit;
+}
+
+.modal-w .btn-confirm {
+  border: 1px solid #3564bd;
+  color: #fff;
+  background: #3564bd;
+}
+
+.modal-w .btn-confirm:disabled {
+  border-color: #a0b5df;
+  background: #a0b5df;
+  cursor: not-allowed;
+}
+
+/* --- СТИЛИ ДЛЯ ОКНА МЕТОДИЧЕК --- */
+.modal-w.method-modal {
+  width: min(850px, calc(100vw - 32px));
+}
+
+.modal-w .method-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.modal-w .method-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-w .method-img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  object-fit: contain;
+}
+
+.modal-w .method-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-w .method-right h1 {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.modal-w .method-authors {
+  color: #818b98;
+  font-size: 13px;
+  margin: 0 0 20px 0;
+}
+
+.modal-w .method-desc {
+  color: #303943;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.modal-w .method-specs {
+  margin-bottom: 20px;
+}
+
+/* Блок скачивания */
+.modal-w .download-box {
+  display: flex;
+  align-items: center;
+  background: #f4f7fb;
+  padding: 12px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #303943;
+  margin-bottom: 15px;
+  transition: background 0.2s;
+}
+
+.modal-w .download-box:hover {
+  background: #e5ecf5;
+}
+
+.modal-w .download-icon {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+.modal-w .download-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.modal-w .download-text strong {
+  font-size: 13px;
+  color: #3564bd;
+}
+
+.modal-w .download-text span {
+  font-size: 11px;
+  color: #818b98;
+}
+
+.modal-w .download-arrow {
+  color: #3564bd;
+  font-weight: bold;
+}
+
+.modal-w .method-note {
+  font-size: 11px;
+  color: #818b98;
+  margin-bottom: 20px;
+}
+
+.modal-w.method-modal .book {
+  margin-top: auto;
+}
 
 /* Тёмная тема для модалки */
 body.dark-theme .modal-w {
