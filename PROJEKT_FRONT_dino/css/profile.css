@@ -1,0 +1,170 @@
+/* ============ ЗАГОЛОВОК СТРАНИЦЫ ============ */
+.page-title {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 24px 20px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.page-title h1 { margin: 0; font-size: 24px; }
+.page-title p  { margin: 4px 0 0; color: #666; }
+
+/* ============ ОСНОВНАЯ СЕТКА ============ */
+.content-wrapper {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 20px 32px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ============ ЛЕВАЯ КОЛОНКА ============ */
+.sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+.profile-card,
+.help-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.profile-card .avatar-large,
+.profile-card .avatar-large-fallback {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: #dbe6ff;
+  color: #4a7dff;
+  display: grid; place-items: center;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.profile-card .avatar-large[src=""] { display: none; }
+.profile-card:has(.avatar-large[src]:not([src=""])) .avatar-large-fallback { display: none; }
+
+.profile-card h2 { margin: 0 0 4px; font-size: 18px; }
+.profile-card p  { margin: 0 0 12px; color: #666; }
+.profile-card hr { border: none; border-top: 1px solid #eee; margin: 16px 0; }
+.ticket-label  { font-size: 12px; color: #888; margin: 0 0 4px; }
+.ticket-number { font-weight: 600; margin: 0; }
+
+.help-card { background: #eef2ff; border-color: #dbe6ff; }
+.help-card h3 { margin: 0 0 8px; font-size: 15px; }
+.help-card p  { margin: 0 0 8px; color: #555; font-size: 13px; }
+.help-card a  { color: #4a7dff; font-size: 13px; }
+
+/* ============ ПРАВАЯ КОЛОНКА ============ */
+.bookings-section h2 { margin: 0 0 16px; font-size: 18px; }
+
+/* Скоупим сетку, чтобы не конфликтовать с .cards-grid каталога */
+.bookings-section .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+.booking-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+.status { padding: 3px 10px; border-radius: 12px; font-weight: 500; font-size: 12px; }
+[data-status="expired"] .status { background: #ffe5e5; color: #d33; }
+[data-status="active"]  .status { background: #e5efff; color: #4a7dff; }
+[data-status="issued"]  .status { background: #e5ffe5; color: #2a2; }
+.id { color: #888; }
+
+.card-middle { display: flex; gap: 12px; }
+.card-middle img {
+  width: 80px; height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+.card-middle h3 { margin: 0 0 4px; font-size: 15px; }
+.card-middle p  { margin: 0 0 4px; color: #666; font-size: 13px; }
+
+.card-bottom { margin-top: auto; }
+.deadline { margin: 0 0 4px; font-weight: 600; }
+[data-status="expired"] .deadline { color: #d33; }
+.note { margin: 0 0 12px; color: #888; font-size: 12px; }
+.action-btn {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}
+.action-btn:hover { background: #f5f6f8; }
+
+/* ============ ИСТОРИЯ ============ */
+.history-block {
+  margin-top: 32px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px;
+}
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+.history-header h2 { margin: 0; font-size: 18px; }
+.history-header span { color: #888; font-size: 13px; }
+
+.history-block table { width: 100%; border-collapse: collapse; }
+.history-block th,
+.history-block td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+.history-block th { color: #888; font-weight: 500; }
+.history-block tbody .status { background: #e5ffe5; color: #2a2; }
+
+.disclaimer { color: #aaa; font-size: 12px; margin-top: 12px; }
+
+/* ============ ТЁМНАЯ ТЕМА (профиль) ============ */
+body.dark-theme .page-title p { color: #c9c9c9; }
+body.dark-theme .action-btn { background: #242424; border-color: #828282; color: #c9c9c9; }
+body.dark-theme .action-btn:hover { background: #2a2a2a; }
+
+body.dark-theme .profile-card,
+body.dark-theme .booking-card,
+body.dark-theme .history-block { background: #1f1f1f; border-color: #828282; }
+body.dark-theme .help-card { background: #1f1f1f; border-color: #828282; }
+body.dark-theme .profile-card h2 { color: #c9c9c9; }
+body.dark-theme .profile-card p  { color: #888; }
+body.dark-theme .profile-card hr { border-top-color: #828282; }
+body.dark-theme .card-middle p   { color: #888; }
+body.dark-theme .history-block th,
+body.dark-theme .history-block td { border-bottom-color: #828282; }
+body.dark-theme .note { color: #c9c9c9; }
+body.dark-theme .profile-card .avatar-large-fallback { background: #2a2a2a; color: #c9c9c9; }
+
+/* ============ АДАПТИВ ============ */
+@media (max-width: 900px) {
+  .content-wrapper { grid-template-columns: 1fr; max-width: 100%; }
+  .page-title { max-width: 100%; }
+}

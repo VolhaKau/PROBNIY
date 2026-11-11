@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог оборудования</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/dino.css">
+  <script type="module" src="js/script.js"></script>
+  <script type="module" src="js/modal-loader.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-container">
+    <div class="icon"><img src="image/logo.png"></div>
+    <div class="header-controls">
+      <div class="theme-switch" id="themeToggle">
+        <svg class="icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M6.34 17.66l-1.41 1.41"></path><path d="M19.07 4.93l-1.41 1.41"></path></svg>
+        <svg class="icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <div class="slider"></div>
+      </div>
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Поиск оборудования">
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="bell-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      </button>
+      <a href="profile.html" class="profile">
+        <img src="image/profile_photo.jpg" class="avatar-large" alt="Фото профиля">
+        <span class="avatar-large-fallback">AC</span>
+        <span class="profile-name" data-i18n="profile_name">Алексей</span>
+      </a>
+      <div class="language-dropdown" id="languageDropdown">
+        <button class="lang-btn" id="currentLangBtn" aria-haspopup="true" aria-expanded="false">
+          <img src="image/flags/ru.png" alt="RU" class="flag" id="currentFlagImg">
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li><button class="lang-option" data-lang="ru"><img src="image/flags/ru.png" alt="RU" class="flag"><span>Русский</span></button></li>
+          <li><button class="lang-option" data-lang="en"><img src="image/flags/eng.png" alt="EN" class="flag"><span>English</span></button></li>
+          <li><button class="lang-option" data-lang="be"><img src="image/flags/by.png" alt="BY" class="flag"><span>Беларуская</span></button></li>
+          <li><button class="lang-option" data-lang="fr"><img src="image/flags/fr.png" alt="FR" class="flag"><span>Français</span></button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="location-bar">
+    <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-7.5-8-13a8 8 0 0 1 16 0c0 5.5-8 13-8 13z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>
+    <span data-i18n="location_title">Получение на кафедре</span>
+    <span class="location-text" data-i18n="location_desc">Расположение и режим работы уточните у ответственного</span>
+    <a href="#" class="link-right" data-i18n="location_link">Контакты кафедры ↗</a>
+  </div>
+
+  <div class="banner"></div>
+
+  <h2 data-i18n="catalog_title">Каталог</h2>
+
+  <!-- Вкладки -->
+  <div class="tabs">
+    <button class="tab active" id="btn-equipment" data-i18n="tab_equipment">Оборудование</button>
+    <button class="tab" id="btn-materials" data-i18n="tab_materials">Методические материалы</button>
+  </div>
+
+  <!-- ================= СЕКЦИЯ ОБОРУДОВАНИЯ ================= -->
+  <div id="section-equipment" class="tab-content active">
+    
+    <!-- кнопки-фильтры -->
+    <div class="filters hidden-filters" id="filters-panel">
+      <button data-i18n="filter_peripherals">Периферия и датчики</button>
+      <button data-i18n="filter_microcontrollers">Микроконтроллеры и отладочные платы</button>
+      <button data-i18n="filter_multimedia">Мультимедиа и оптика</button>
+      <button data-i18n="filter_tools">Инструменты и монтаж</button>
+      <button data-i18n="filter_network">Сетевое оборудование</button>
+    </div>
+
+    <div class="popular-header">
+      <h3>
+        <span data-i18n="popular_title">Популярное оборудование</span> 
+        <span class="count" data-i18n="popular_count">5 моделей</span>
+      </h3>
+    </div>
+
+    <div class="cards-grid" id="cards-container"></div>
+
+    <div class="request-form">
+      <div class="form-text">
+        <p><strong data-i18n="request_title">Не нашли нужное оборудование?</strong></p>
+        <p data-i18n="request_desc">Расскажите о своей задаче — оставьте запрос в форме. она обязательно появится. однажды...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= СЕКЦИЯ МЕТОДИЧЕК ================= -->
+  <div id="section-materials" class="tab-content">
+    
+    <div class="filters hidden-filters" id="method-filters">
+      <button>Все материалы</button>
+      <button>Мат. анализ</button>
+      <button>ОАИП</button>
+      <button>Дискретная математика</button>
+      <button>Теория вероятности</button>
+    </div>
+
+    <div class="popular-header">
+      <h3>Методические материалы <span class="count">6 изданий</span></h3> <!-- Поменял на 6, так как их теперь 6 -->
+      <a href="#" style="color: #1a73e8; font-size: 13px; text-decoration: none;">По названию ↓</a>
+    </div>
+
+    <!-- Вот сюда JS сам вставит карточки -->
+    <div class="cards-grid"></div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p data-i18n="footer_text">&#169; 2026 ГГТУ</p>
+</footer>
+
+<div id="modal-root"></div>
+<script type="module">
+    import { initDinoAnimation } from './js/dino-animation.js';
+    initDinoAnimation();
+  </script>
+</body>
+</html>

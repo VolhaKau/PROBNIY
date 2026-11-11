@@ -1,0 +1,41 @@
+body { overflow-x: hidden; }
+
+#dino-container {
+  position: fixed;
+  top: 50%; 
+  left: -750px; 
+  width: 150px; 
+  
+  /* СТАВИМ МАКСИМАЛЬНО ВОЗМОЖНЫЙ Z-INDEX */
+  z-index: 2147483647; 
+  
+  pointer-events: none; 
+  transition: transform 5s linear; 
+  transform: translateY(-50%); 
+}
+
+#dino-container img {
+  width: 500%;
+  height: auto;
+  display: block;
+}
+
+#dino-container.run-right {
+  transform: translateY(-50%) translateX(calc(100vw + 500px)); 
+}
+
+#dino-container.reset-instant {
+  transition: none !important; 
+}
+
+/* Окно */
+#booking-modal {
+  /* Убираем у окна максимальный z-index, если он был */
+  z-index: 100; 
+  
+}
+
+#booking-modal.pushed-out {
+  transform: translateX(150vw); 
+  transition: transform 5s linear; 
+}
