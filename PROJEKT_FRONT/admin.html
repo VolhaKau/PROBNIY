@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный кабинет администратора</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body class="theme-dark">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <a href="index.html"><img src="image/logo.png" alt="ГГТУ"></a>
+    </div>
+      
+    <div class="header-controls">
+      <!-- переключатель темы -->
+      <div class="theme-switch" id="themeToggle">
+        <svg class="icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path><path d="M12 20v2"></path>
+          <path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path>
+          <path d="M2 12h2"></path><path d="M20 12h2"></path>
+          <path d="M6.34 17.66l-1.41 1.41"></path><path d="M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <div class="slider"></div>
+      </div>
+    
+      <!-- строка поиска -->
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input type="text" placeholder="Поиск оборудования">
+      </div>
+    </div>
+
+    <!-- уведомления, профиль, флаг -->
+    <div class="header-right">
+      <button class="bell-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </button>
+      
+      <a href="#" class="profile" data-user-id="">
+        <span class="avatar" data-field="admin.initials">ВП</span>
+        <span class="profile-name" data-field="admin.firstName">Виктор</span>
+      </a>
+      
+      <div class="language-dropdown" id="languageDropdown">
+        <button class="lang-btn" id="currentLangBtn" aria-haspopup="true" aria-expanded="false">
+          <img src="image/flags/ru.png" alt="RU" class="flag" id="currentFlagImg">
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li><button class="lang-option" data-lang="ru"><img src="image/flags/ru.png" alt="RU" class="flag"><span>Русский</span></button></li>
+          <li><button class="lang-option" data-lang="en"><img src="image/flags/eng.png" alt="EN" class="flag"><span>English</span></button></li>
+          <li><button class="lang-option" data-lang="be"><img src="image/flags/by.png" alt="BY" class="flag"><span>Беларуская</span></button></li>
+          <li><button class="lang-option" data-lang="fr"><img src="image/flags/fr.png" alt="FR" class="flag"><span>Français</span></button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ЗАГОЛОВОК СТРАНИЦЫ -->
+<div class="page-title">
+  <h1>Личный кабинет</h1>
+  <button class="logout-btn">Выйти</button>
+</div>
+
+<!-- MAIN -->
+<main class="content-wrapper admin-layout">
+
+  <!-- ЛЕВАЯ КОЛОНКА: ПРОФИЛЬ АДМИНА -->
+  <aside class="sidebar">
+    <div class="profile-card admin-profile" data-user-id="">
+      <span class="avatar-large" data-field="admin.initials">ВП</span>
+      <h2 data-field="admin.fullName">Виктор Петрович</h2>
+      <span class="role-badge admin" data-field="admin.role">• Админ</span>
+      
+      <button class="edit-profile-btn">Редактирование карточек</button>
+    </div>
+  </aside>
+
+  <!-- ПРАВАЯ КОЛОНКА: АНАЛИТИКА И ТАБЛИЦЫ -->
+  <section class="bookings-section">
+
+    <!-- ТОП-5 ОБОРУДОВАНИЯ -->
+    <div class="widget-card">
+      <div class="widget-header">
+        <h3>Топ-5 востребованного оборудования за месяц</h3>
+        <span class="widget-subtitle">по количеству бронирований</span>
+      </div>
+      
+      <div class="top-list" id="top-equipment-list">
+        <!-- Шаблон строки -->
+        <div class="top-row" data-equipment-id="EQ-001">
+          <span class="item-name" data-field="equipment.name">Осциллограф АСК-2062</span>
+          <span class="group-badge" data-field="group.name">ИТП-21</span>
+          <span class="date" data-field="equipment.lastBookingDate">17.03.2026</span>
+        </div>
+        <div class="top-row" data-equipment-id="EQ-002">
+          <span class="item-name" data-field="equipment.name">Мультиметр DT-830B</span>
+          <span class="group-badge" data-field="group.name">ИТП-21</span>
+          <span class="date" data-field="equipment.lastBookingDate">22.03.2026</span>
+        </div>
+        <div class="top-row" data-equipment-id="EQ-003">
+          <span class="item-name" data-field="equipment.name">Генератор сигналов GWS-1200</span>
+          <span class="group-badge" data-field="group.name">ИТП-22</span>
+          <span class="date" data-field="equipment.lastBookingDate">25.03.2026</span>
+        </div>
+        <div class="top-row" data-equipment-id="EQ-004">
+          <span class="item-name" data-field="equipment.name">Лабораторный блок питания</span>
+          <span class="group-badge" data-field="group.name">ИТП-21</span>
+          <span class="date" data-field="equipment.lastBookingDate">27.03.2026</span>
+        </div>
+        <div class="top-row" data-equipment-id="EQ-005">
+          <span class="item-name" data-field="equipment.name">Цифровой микроскоп</span>
+          <span class="group-badge" data-field="group.name">ИТП-23</span>
+          <span class="date" data-field="equipment.lastBookingDate">28.03.2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- МЕТРИКИ -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon">📋</div>
+        <div class="metric-title">Всего бронирований</div>
+        <div class="metric-value" data-field="stats.totalBookings">247</div>
+        <div class="metric-desc">за текущий семестр</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">✅</div>
+        <div class="metric-title">Активных</div>
+        <div class="metric-value" data-field="stats.activeBookings">38</div>
+        <div class="metric-desc">сейчас в использовании</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">⚠️</div>
+        <div class="metric-title">Просроченных</div>
+        <div class="metric-value" data-field="stats.overdueBookings">5</div>
+        <div class="metric-desc">требует внимания</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">📦</div>
+        <div class="metric-title">Единиц оборудования</div>
+        <div class="metric-value" data-field="stats.totalEquipment">84</div>
+        <div class="metric-desc">в фонде кафедры</div>
+      </div>
+    </div>
+
+    <!-- БРОНИРОВАНИЯ ПО ГРУППАМ -->
+    <div class="widget-card">
+      <div class="widget-header">
+        <h3>Бронирования по группам</h3>
+        <div class="group-filters">
+          <label><input type="checkbox" checked> ИТП-21</label>
+          <label><input type="checkbox" checked> ИТП-22</label>
+          <label><input type="checkbox" checked> ИТП-23</label>
+        </div>
+      </div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Группа</th>
+            <th>Время бронирования</th>
+            <th>Всего бронирований</th>
+          </tr>
+        </thead>
+        <tbody id="group-stats-list">
+          <tr data-group-id="GR-21">
+            <td><span class="group-badge" data-field="group.name">ИТП-21</span></td>
+            <td data-field="group.totalTime">5 дней</td>
+            <td data-field="group.totalBookings">89</td>
+          </tr>
+          <tr data-group-id="GR-22">
+            <td><span class="group-badge" data-field="group.name">ИТП-22</span></td>
+            <td data-field="group.totalTime">7 дней</td>
+            <td data-field="group.totalBookings">103</td>
+          </tr>
+          <tr data-group-id="GR-23">
+            <td><span class="group-badge" data-field="group.name">ИТП-23</span></td>
+            <td data-field="group.totalTime">3 дней</td>
+            <td data-field="group.totalBookings">55</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ВСЕ БРОНИРОВАНИЯ -->
+    <div class="widget-card">
+      <div class="widget-header">
+        <h3>Все бронирования оборудования</h3>
+  
+    <!-- Обертка для выпадающего меню -->
+        <div class="dropdown">
+        <button class="filter-btn">Все статусы ▾</button>
+    
+    <!-- Само меню -->
+        <ul class="dropdown-menu">
+            <li><a href="#">Все статусы</a></li>
+            <li><a href="#">Возвращено</a></li>
+            <li><a href="#">Не выдан</a></li>
+            <li><a href="#">Просрочено</a></li>
+        </ul>
+        </div>
+        </div>
+    </div>
+      
+
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Студент</th>
+            <th>Группа</th>
+            <th>Дата выдачи</th>
+            <th>Дата возврата</th>
+            <th>Статус</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="all-bookings-list">
+          <!-- data-status="returned | not_issued | overdue" для стилизации -->
+          <tr data-booking-id="BR-001" data-status="returned">
+            <td data-field="user.fullName">Шашкова Данила</td>
+            <td><span class="group-badge" data-field="user.group">ИТП-23</span></td>
+            <td data-field="booking.issueDate">12.03.2026</td>
+            <td data-field="booking.returnDate">17.03.2026</td>
+            <td><span class="status-badge" data-field="booking.statusLabel">Возвращено</span></td>
+            <td><button class="action-btn outline-btn" data-action="view">Просмотр заявки</button></td>
+          </tr>
+          <tr data-booking-id="BR-002" data-status="not_issued">
+            <td data-field="user.fullName">Зюзина Диана</td>
+            <td><span class="group-badge" data-field="user.group">ИТП-23</span></td>
+            <td data-field="booking.issueDate">15.03.2026</td>
+            <td data-field="booking.returnDate">22.03.2026</td>
+            <td><span class="status-badge" data-field="booking.statusLabel">Не выдан</span></td>
+            <td><button class="action-btn outline-btn" data-action="view">Просмотр заявки</button></td>
+          </tr>
+          <tr data-booking-id="BR-003" data-status="overdue">
+            <td data-field="user.fullName">Ходик Максим</td>
+            <td><span class="group-badge" data-field="user.group">ИТП-23</span></td>
+            <td data-field="booking.issueDate">10.03.2026</td>
+            <td data-field="booking.returnDate">14.03.2026</td>
+            <td><span class="status-badge" data-field="booking.statusLabel">Просрочено на 2 дня</span></td>
+            <td><button class="action-btn outline-btn" data-action="view">Просмотр заявки</button></td>
+          </tr>
+          <tr data-booking-id="BR-004" data-status="not_issued">
+            <td data-field="user.fullName">Прокопенко Артём</td>
+            <td><span class="group-badge" data-field="user.group">ИТП-23</span></td>
+            <td data-field="booking.issueDate">18.03.2026</td>
+            <td data-field="booking.returnDate">25.03.2026</td>
+            <td><span class="status-badge" data-field="booking.statusLabel">Не выдан</span></td>
+            <td><button class="action-btn outline-btn" data-action="view">Просмотр заявки</button></td>
+          </tr>
+          <tr data-booking-id="BR-005" data-status="returned">
+            <td data-field="user.fullName">Прохор Шалин</td>
+            <td><span class="group-badge" data-field="user.group">ИТП-23</span></td>
+            <td data-field="booking.issueDate">20.03.2026</td>
+            <td data-field="booking.returnDate">27.03.2026</td>
+            <td><span class="status-badge" data-field="booking.statusLabel">Возвращено</span></td>
+            <td><button class="action-btn outline-btn" data-action="view">Просмотр заявки</button></td>
+          </tr>
+          <tr data-booking-id="BR-006" data-status="not_issued">
+            <td data-field="user.fullName">Лясова Дмитрий</td>
+            <td><span class="group-badge" data-field="user.group">ИТП-23</span></td>
+            <td data-field="booking.issueDate">21.03.2026</td>
+            <td data-field="booking.returnDate">28.03.2026</td>
+            <td><span class="status-badge" data-field="booking.statusLabel">Не выдан</span></td>
+            <td><button class="action-btn outline-btn" data-action="view">Просмотр заявки</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 ГГТУ</p>
+</footer>
+
+</body>
+</html>
