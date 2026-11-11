@@ -83,29 +83,42 @@ h2 { font-size: 26px; margin-bottom: 20px; }
 .tabs {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Единый отступ для всех секций */
 }
+
 .tab {
   padding: 8px 16px;
-  border: 1px solid #1a73e8;
-  background-color: #1a73e8;
-  color: #fff;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #555;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
 }
-.tab:not(:first-child) {
-  background-color: #fff;
-  color: #555;
-  border-color: #ddd;
+
+.tab.active {
+  background-color: #1a73e8;
+  color: #fff;
+  border-color: #1a73e8;
 }
 
+/* Управление видимостью секций */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Фильтры */
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 30px;
 }
+
 .filters button {
   padding: 8px 15px;
   border: 1px solid #ddd;
@@ -115,6 +128,7 @@ h2 { font-size: 26px; margin-bottom: 20px; }
   font-size: 13px;
   color: #555;
 }
+
 .filters button:hover { background: #f5f6f8; }
 
 .hidden-filters { display: none !important; }
@@ -219,7 +233,8 @@ body.dark-theme .banner h1,
 body.dark-theme .step-text { color: #e0e0e0; }
 body.dark-theme .link-right,
 body.dark-theme .banner-link { color: #74c0fc; }
-body.dark-theme .tab:not(:first-child) { background: #1e1e1e; border-color: #333; color: #c9c9c9; }
+body.dark-theme .tab { background: #1e1e1e; border-color: #333; color: #c9c9c9; }
+body.dark-theme .tab.active { background: #1a73e8; border-color: #1a73e8; color: #fff; }
 body.dark-theme .filters button,
 body.dark-theme .book-btn { background: #1e1e1e; border-color: #333; color: #c9c9c9; }
 body.dark-theme .filters button:hover,

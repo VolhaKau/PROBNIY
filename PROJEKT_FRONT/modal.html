@@ -19,7 +19,7 @@
         <thead>
           <tr><th>Номер</th><th>Состояние</th><th>Статус</th><th>Бронь</th></tr>
         </thead>
-        <!-- Строки сгенерирует JS -->
+        <!-- Сюда JS подставляет строки -->
         <tbody id="modal-instances"></tbody>
       </table>
     </section>
@@ -77,8 +77,12 @@
       <button type="button" class="cal-arrow" id="cal-next">›</button>
     </div>
     <div class="calendar-grid" id="calendar-days">
-      <div class="day-name">Пн</div><div class="day-name">Вт</div><div class="day-name">Ср</div>
-      <div class="day-name">Чт</div><div class="day-name">Пт</div><div class="day-name">Сб</div>
+      <div class="day-name">Пн</div>
+      <div class="day-name">Вт</div>
+      <div class="day-name">Ср</div>
+      <div class="day-name">Чт</div>
+      <div class="day-name">Пт</div>
+      <div class="day-name">Сб</div>
       <div class="day-name">Вс</div>
     </div>
   </div>
@@ -103,7 +107,7 @@
   </div>
 </dialog>
 
-<!-- ДЛЯ МЕТОДИЧЕК ЭТО (НЕ ПОДКЛЮЧЕНО)-->
+<!-- Модальное окно для методичек -->
 <dialog class="modal-w method-modal" id="method-modal">
   <header>
     <div class="breadcrumb" id="method-category">Каталог / Методические материалы</div>
@@ -111,13 +115,11 @@
   </header>
 
   <div class="method-content">
-    <!-- Левая колонка: Обложка и статус -->
     <div class="method-left">
       <img id="method-cover" src="" alt="Обложка" class="method-img">
       <p class="status green" id="method-status"></p>
     </div>
 
-    <!-- Правая колонка: Информация -->
     <div class="method-right">
       <h1 id="method-title"></h1>
       <p class="method-authors" id="method-authors"></p>
@@ -125,7 +127,7 @@
 
       <table class="specs method-specs" id="method-specs"></table>
 
-      <!-- Блок скачивания -->
+      <!-- Блок скачивания PDF -->
       <a href="#" class="download-box" id="method-download" download>
         <div class="download-icon">📄</div>
         <div class="download-text">

@@ -1,4 +1,4 @@
-import { EQUIPMENT } from './opisanie.js';
+import { EQUIPMENT } from '../data/opisanie.js';
 
 export function initEquipmentModal(onBookClick) {
   const modal = document.getElementById('modal-w');
@@ -16,8 +16,10 @@ export function initEquipmentModal(onBookClick) {
 
   function showPhoto(index) {
     if (!photos.length) return;
+    // Зацикливаем: если уходим в минус или за границу, возвращаемся в начало/конец
     currentPhoto = (index + photos.length) % photos.length;
     cameraImage.src = photos[currentPhoto];
+    
     dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
       dot.classList.toggle('active', i === currentPhoto);
     });
@@ -46,6 +48,7 @@ export function initEquipmentModal(onBookClick) {
     const tbody = document.getElementById('modal-instances');
     tbody.innerHTML = '';
 
+    // Генерируем базовый номер для экземпляров, чтобы они не повторялись у разных карточек
     const index = Object.keys(EQUIPMENT).indexOf(equipmentKey);
     const baseId = 400000 + index * 100;
 
@@ -90,6 +93,7 @@ export function initEquipmentModal(onBookClick) {
       tbody.appendChild(tr);
     });
 
+    // Автоматически выбираем первый свободный экземпляр
     const firstFree = tbody.querySelector('tr[data-status="free"]');
     if (firstFree) {
       selectInstance(firstFree);
@@ -151,7 +155,7 @@ export function initEquipmentModal(onBookClick) {
 
     modal.close();
     
-    // Вызываем переданный коллбэк, чтобы открыть второе окно
+    // Передаем данные в окно бронирования
     if (onBookClick) {
       onBookClick(title, image, instanceInfo);
     }
@@ -162,7 +166,7 @@ export function initEquipmentModal(onBookClick) {
       fillEquipment(key);
       modal.showModal();
     },
-    // Метод нужен, чтобы вернуть это окно обратно (после закрытия окна брони)
+    // Возвращаем окно (например, если пользователь закрыл бронирование)
     show() {
       modal.showModal();
     }

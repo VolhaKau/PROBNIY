@@ -10,7 +10,10 @@ export function initBookingModal(onCloseCallback) {
   const dateEndInput = document.getElementById('date-end');
   const dateDuration = document.getElementById('date-duration');
 
-  const monthNames = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  const monthNames = [
+    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 
+    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+  ];
   const calTitle = document.getElementById('cal-title');
   const calPrev = document.getElementById('cal-prev');
   const calNext = document.getElementById('cal-next');
@@ -21,7 +24,10 @@ export function initBookingModal(onCloseCallback) {
   let startDate = null;
   let endDate = null;
 
-  function dateVal(dt) { return dt.y * 10000 + dt.m * 100 + dt.d; }
+  // Переводим дату в числовой формат, чтобы легко сравнивать даты через обычные операторы > и <
+  function dateVal(dt) {
+    return dt.y * 10000 + dt.m * 100 + dt.d;
+  }
 
   function formatDate(dt) {
     return `${dt.d} ${monthNames[dt.m].toLowerCase()} ${dt.y}`;
@@ -30,14 +36,18 @@ export function initBookingModal(onCloseCallback) {
   function renderCalendar() {
     calTitle.textContent = `${monthNames[curMonth]} ${curYear}`;
 
+    // Очищаем сетку от старых дней, оставляя только заголовки дней недели (их 7)
     while (calendarGrid.children.length > 7) {
       calendarGrid.removeChild(calendarGrid.lastChild);
     }
 
     const firstDay = new Date(curYear, curMonth, 1).getDay();
+    
+    // Высчитываем сдвиг, чтобы неделя начиналась с понедельника, а не с воскресенья
     const offset = (firstDay + 6) % 7;
     const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
 
+    // Заполняем пустые ячейки перед первым числом месяца
     for (let i = 0; i < offset; i++) {
       calendarGrid.appendChild(document.createElement('div'));
     }
@@ -51,6 +61,7 @@ export function initBookingModal(onCloseCallback) {
       const thisDate = { d, m: curMonth, y: curYear };
       const v = dateVal(thisDate);
 
+      // Подсвечиваем выбранные даты и диапазон между ними
       if (startDate && v === dateVal(startDate)) btn.classList.add('selected');
       if (endDate && v === dateVal(endDate)) btn.classList.add('selected');
       if (startDate && endDate && v > dateVal(startDate) && v < dateVal(endDate)) {
@@ -63,14 +74,20 @@ export function initBookingModal(onCloseCallback) {
   }
 
   function handleDayClick(date) {
+    // Если кликаем в первый раз или начинаем новый выбор после готового диапазона
     if (!startDate || (startDate && endDate)) {
       startDate = date;
       endDate = null;
-    } else if (dateVal(date) < dateVal(startDate)) {
+    } 
+    // Если кликнули на дату раньше выбранной, она становится новой стартовой
+    else if (dateVal(date) < dateVal(startDate)) {
       startDate = date;
-    } else {
+    } 
+    // Иначе ставим дату возврата
+    else {
       endDate = date;
     }
+    
     renderCalendar();
     updateUI();
   }
@@ -80,9 +97,11 @@ export function initBookingModal(onCloseCallback) {
       dateStartInput.value = formatDate(startDate);
       dateEndInput.value = formatDate(endDate);
 
+      // Считаем разницу в миллисекундах и делим на кол-во миллисекунд в сутках (86400000)
       const days = Math.round(
         (new Date(endDate.y, endDate.m, endDate.d) - new Date(startDate.y, startDate.m, startDate.d)) / 86400000
       ) + 1;
+      
       dateDuration.textContent = `${startDate.d}-${endDate.d} · ${days} дн.`;
     } else if (startDate) {
       dateStartInput.value = formatDate(startDate);
@@ -100,6 +119,7 @@ export function initBookingModal(onCloseCallback) {
     startDate = null;
     endDate = null;
 
+    // При открытии сбрасываем календарь на текущий месяц
     const now = new Date();
     curMonth = now.getMonth();
     curYear = now.getFullYear();
@@ -107,19 +127,23 @@ export function initBookingModal(onCloseCallback) {
     agreeCheckbox.checked = false;
     renderCalendar();
     updateUI();
-    renderCalendar();
-    updateUI();
   }
 
   calPrev.onclick = () => {
     curMonth--;
-    if (curMonth < 0) { curMonth = 11; curYear--; }
+    if (curMonth < 0) { 
+      curMonth = 11; 
+      curYear--; 
+    }
     renderCalendar();
   };
 
   calNext.onclick = () => {
     curMonth++;
-    if (curMonth > 11) { curMonth = 0; curYear++; }
+    if (curMonth > 11) { 
+      curMonth = 0; 
+      curYear++; 
+    }
     renderCalendar();
   };
 
@@ -136,7 +160,7 @@ export function initBookingModal(onCloseCallback) {
 
   function closeWindow() {
     bookingModal.close();
-    // Вызываем коллбэк, чтобы вернуть окно с оборудованием
+    // Возвращаем предыдущее окно
     if (onCloseCallback) {
       onCloseCallback();
     }
@@ -144,6 +168,8 @@ export function initBookingModal(onCloseCallback) {
 
   closeBooking.onclick = closeWindow;
   cancelBooking.onclick = closeWindow;
+  
+  // Закрытие по клику на затемненный фон
   bookingModal.addEventListener('click', (e) => {
     if (e.target === bookingModal) closeWindow();
   });

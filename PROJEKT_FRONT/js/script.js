@@ -1,3 +1,5 @@
+import { MANUALS } from '../data/manuals.js';
+
 // ============================================================
 // ПЕРЕВОДЫ (i18n)
 // ============================================================
@@ -257,22 +259,43 @@ if (themeToggle) {
 }
 
 // ============================================================
-// ФИЛЬТРЫ КАТАЛОГА (только index.html)
+// ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК И ФИЛЬТРОВ
 // ============================================================
-const btnEquipment = document.getElementById('btn-equipment');
-const filtersPanel = document.getElementById('filters-panel');
+const tabs = document.querySelectorAll('.tab');
+const sections = document.querySelectorAll('.tab-content');
 
-if (btnEquipment && filtersPanel) {
-  btnEquipment.addEventListener('click', () => {
-    if (filtersPanel.classList.contains('hidden-filters')) {
-      filtersPanel.classList.remove('hidden-filters');
-      filtersPanel.classList.add('show-animation');
-      setTimeout(() => filtersPanel.classList.remove('show-animation'), 400);
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const isActive = tab.classList.contains('active');
+    const targetId = tab.id === 'btn-equipment' ? 'section-equipment' : 'section-materials';
+    const targetSection = document.getElementById(targetId);
+    const targetFilters = tab.id === 'btn-equipment' ? document.getElementById('filters-panel') : document.getElementById('method-filters');
+
+    if (!isActive) {
+      // ПЕРВЫЙ КЛИК: Переключаем вкладку
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      sections.forEach(s => s.classList.remove('active'));
+      if (targetSection) targetSection.classList.add('active');
+
+      // При переключении скрываем ВСЕ фильтры
+      document.getElementById('filters-panel').classList.add('hidden-filters');
+      document.getElementById('method-filters').classList.add('hidden-filters');
     } else {
-      filtersPanel.classList.add('hidden-filters');
+      // ВТОРОЙ КЛИК: Показываем/скрываем фильтры текущей вкладки
+      if (targetFilters) {
+        if (targetFilters.classList.contains('hidden-filters')) {
+          targetFilters.classList.remove('hidden-filters');
+          targetFilters.classList.add('show-animation');
+          setTimeout(() => targetFilters.classList.remove('show-animation'), 400);
+        } else {
+          targetFilters.classList.add('hidden-filters');
+        }
+      }
     }
   });
-}
+});
 
 // ============================================================
 // КАРТОЧКИ КАТАЛОГА (только index.html)
@@ -284,19 +307,19 @@ function EquipmentCard(id, image, type, name, description, numberOfAvailable, st
 }
 
 const equipmentCards = [
-  EquipmentCard(1, 'all_oborudovanie/plati/Arduino_Uno_R3/Arduino_Uno_R3.png', 'Микроконтроллеры', 'Arduino Uno R3',
+  EquipmentCard(1, 'image/all_oborudovanie/plati/Arduino_Uno_R3/Arduino_Uno_R3.png', 'Микроконтроллеры', 'Arduino Uno R3',
     'Arduino Uno R3 — это компактная плата-микроконтроллер для обучения электронике и создания прототипов электронных устройств.',
     '● 2 из 5 доступны', 'green'),
-  EquipmentCard(2, 'all_oborudovanie/plati/Arduino_Mega_2560/Arduino_Mega_2560.png', 'Микроконтроллеры', 'Arduino Mega 2560',
+  EquipmentCard(2, 'image/all_oborudovanie/plati/Arduino_Mega_2560/Arduino_Mega_2560.png', 'Микроконтроллеры', 'Arduino Mega 2560',
     'Arduino Mega 2560 — это более мощная версия платы Arduino Uno, созданная для сложных и масштабных проектов.',
     '● 1 из 3 доступен', 'green'),
-  EquipmentCard(3, 'all_oborudovanie/plati/NodeMCU_ESP8266/NodeMCU_ESP8266.png', 'Микроконтроллеры', 'NodeMCU ESP8266',
+  EquipmentCard(3, 'image/all_oborudovanie/plati/NodeMCU_ESP8266/NodeMCU_ESP8266.png', 'Микроконтроллеры', 'NodeMCU ESP8266',
     'NodeMCU ESP8266 — это платформа для создания устройств интернета вещей (IoT), основанная на микроконтроллере ESP8266.',
     '● Доступен с 6 октября', 'orange'),
-  EquipmentCard(4, 'all_oborudovanie/plati/NodeMCU_ESP8266/STM32_Nucleo_F401RE.png', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
+  EquipmentCard(4, 'image/all_oborudovanie/plati/STM32_Nucleo_F401RE/STM32_Nucleo_F401RE.png', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
     'STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.',
     '● 3 из 4 доступны', 'green'),
-  EquipmentCard(5, 'all_oborudovanie/plati/NodeMCU_ESP8266/STM32_Nucleo_F401RE.png', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
+  EquipmentCard(5, 'image/all_oborudovanie/plati/STM32_Nucleo_F401RE/STM32_Nucleo_F401RE.png', 'Микроконтроллеры', 'STM32 Nucleo F401RE',
     'STM32 Nucleo F401RE — это отладочная плата на 32-разрядном ARM-процессоре представляющая собой гибкую платформу.',
     '● 3 из 4 доступны', 'green'),
 ];
@@ -326,3 +349,37 @@ function renderCards(cardsArray) {
 }
 
 renderCards(equipmentCards);
+
+// ============================================================
+// КАРТОЧКИ МЕТОДИЧЕК (Автоматическая генерация)
+// ============================================================
+const methodsContainer = document.querySelector('#section-materials .cards-grid');
+
+function renderMethods() {
+  if (!methodsContainer) return;
+  methodsContainer.innerHTML = '';
+
+  Object.keys(MANUALS).forEach(key => {
+    const item = MANUALS[key];
+    const el = document.createElement('div');
+    el.className = 'card';
+    
+    el.innerHTML = `
+      <img src="${item.image}" alt="${item.title}" class="card-img" style="object-fit: contain; background: #f8f9fa;">
+      
+      <p class="card-category">${item.category}</p>
+      <h4>${item.title}</h4>
+      
+      <!-- margin-top: auto прижимает этот блок к самому низу карточки -->
+      <div style="margin-top: auto; margin-bottom: 15px;">
+        <p style="margin: 0 0 5px 0; font-size: 13px; color: #666;">${item.author}</p>
+        <p style="margin: 0; font-size: 12px; color: #888;">${item.publication} г. · PDF</p>
+      </div>
+      
+      <button class="book-btn method-btn" data-method="${key}">Подробнее</button>
+    `;
+    methodsContainer.appendChild(el);
+  });
+}
+
+renderMethods();
